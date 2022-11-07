@@ -634,9 +634,7 @@
                           </svg>
                         </div>
                       </button>
-                      {%- if block.settings.show_dynamic_checkout -%}
-                        {{ form | payment_button }}
-                      {%- endif -%}
+                      <button type="button" onclick="instantBuy()">buy now</button>
                     </div>
                   {%- endform -%}
                 </product-form>
@@ -1109,6 +1107,18 @@
         hiddenInput.value = event.currentTarget.value;
       });
     });
+    function instantBuy(){
+      $.ajax({
+        url: "/cart/add",
+        type: "post",
+        data: $('form').serialize(),
+        dataType: 'json',
+        success: function(){
+          window.location.href = "/checkout";
+        },
+        error: function(err){ }
+      })
+    }
   </script>
 
   {%- liquid
