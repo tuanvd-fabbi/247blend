@@ -10,20 +10,29 @@
     "cart-footer": {
       "type": "main-cart-footer",
       "blocks": {
+        "87e2aed5-9195-4d91-a99d-7b8edd64fe9d": {
+          "type": "shopify:\/\/apps\/amp\/blocks\/delivery-datetime\/96f4dffc-26ce-430c-9359-005a406614b8",
+          "settings": {
+          }
+        },
         "subtotal": {
           "type": "subtotal",
-          "settings": {}
+          "settings": {
+          }
         },
         "buttons": {
           "type": "buttons",
-          "settings": {}
+          "settings": {
+          }
         }
       },
       "block_order": [
+        "87e2aed5-9195-4d91-a99d-7b8edd64fe9d",
         "subtotal",
         "buttons"
       ],
-      "settings": {}
+      "settings": {
+      }
     },
     "featured-collection": {
       "type": "featured-collection",
@@ -70,7 +79,8 @@
         },
         "email-form": {
           "type": "email_form",
-          "settings": {}
+          "settings": {
+          }
         }
       },
       "block_order": [
