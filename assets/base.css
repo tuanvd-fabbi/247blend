@@ -3093,7 +3093,7 @@ a.slider-arrow:nth-of-type(2) {
 .appstle-as-cp-wrapper-portal {
   background-color: #F4F4F4;
 }
-.as-active-badge {
+#MainContent .as-active-badge {
   background-color: #EDB0D0;
   color: #fff;
 }
