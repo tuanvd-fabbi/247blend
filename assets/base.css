@@ -3103,3 +3103,6 @@ a.slider-arrow:nth-of-type(2) {
   border-radius: 40px;
   color: #000;
 }
+#MainContent .as-tab-list button {
+  border-color: #db60a0;
+}
