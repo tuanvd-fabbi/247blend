@@ -3106,6 +3106,6 @@ a.slider-arrow:nth-of-type(2) {
 #MainContent .as-tab-list button {
   border-color: #db60a0;
 }
-#MainContent .rdp-day_selected {
+#headlessui-portal-root .rdp-day_selected {
   background-color: #db60a0;
 }
