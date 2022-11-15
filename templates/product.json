@@ -12,19 +12,23 @@
         },
         "title": {
           "type": "title",
-          "settings": {}
+          "settings": {
+          }
         },
         "rating": {
           "type": "rating",
-          "settings": {}
+          "settings": {
+          }
         },
         "price": {
           "type": "price",
-          "settings": {}
+          "settings": {
+          }
         },
         "judgeme_preview_badge_product_page_6fab5346": {
           "type": "shopify:\/\/apps\/judge-me-product-reviews\/blocks\/preview_badge\/61ccd3b1-a9f2-4160-9fe9-4fec8413e5d8",
-          "settings": {}
+          "settings": {
+          }
         },
         "variant_picker": {
           "type": "variant_picker",
@@ -34,19 +38,8 @@
         },
         "quantity_selector": {
           "type": "quantity_selector",
-          "settings": {}
-        },
-        "7e6a0455-9a2c-43ca-9f82-ab5153604e3a": {
-          "type": "shopify:\/\/apps\/paywhirl-subscription-payments\/blocks\/paywhirl-plan-selector\/41e95d60-82cf-46e8-84de-618d7e4c37b7",
-          "disabled": true,
           "settings": {
-            "font_scale": 100,
-            "product": "{{product}}"
           }
-        },
-        "ef38894c-fdb3-4234-ace3-41ec066c9a00": {
-          "type": "shopify:\/\/apps\/appstle-subscriptions\/blocks\/appstle-subscription-product-page-widget\/fe257d39-6f88-4f35-ab08-bd437e3aa94e",
-          "settings": {}
         },
         "buy_buttons": {
           "type": "buy_buttons",
@@ -56,7 +49,8 @@
         },
         "description": {
           "type": "description",
-          "settings": {}
+          "settings": {
+          }
         },
         "share": {
           "type": "share",
@@ -73,8 +67,6 @@
         "judgeme_preview_badge_product_page_6fab5346",
         "variant_picker",
         "quantity_selector",
-        "7e6a0455-9a2c-43ca-9f82-ab5153604e3a",
-        "ef38894c-fdb3-4234-ace3-41ec066c9a00",
         "buy_buttons",
         "description",
         "share"
@@ -96,7 +88,8 @@
       "blocks": {
         "judgeme_review_widget_a64cdd9b": {
           "type": "shopify:\/\/apps\/judge-me-product-reviews\/blocks\/review_widget\/61ccd3b1-a9f2-4160-9fe9-4fec8413e5d8",
-          "settings": {}
+          "settings": {
+          }
         }
       },
       "block_order": [
@@ -454,7 +447,8 @@
         },
         "email-form": {
           "type": "email_form",
-          "settings": {}
+          "settings": {
+          }
         }
       },
       "block_order": [
