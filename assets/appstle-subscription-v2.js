@@ -308,6 +308,49 @@ var appstleInit = function () {
                   } else {
                     discountText = priceAdjustment?.value + '%';
                   }
+
+
+                  let jsonOfSellingPlans = RS?.Config?.sellingPlansJson
+
+                  if(jsonOfSellingPlans?.length) {
+
+                  
+                    var sellingPlanFrequency = jsonOfSellingPlans?.find(item => item?.id?.split('/')?.pop() == sellingPlan.id)
+                    var sellingPlanFrequencyText;
+                    if(sellingPlanFrequency?.frequencyInterval === "MONTH" && sellingPlanFrequency?.frequencyCount > 1){
+                      sellingPlanFrequencyText = widgetLabels['appstle.subscription.wg.monthsFrequencyTextV2']
+                      }
+                    
+                    if(sellingPlanFrequency?.frequencyInterval === "MONTH" && sellingPlanFrequency?.frequencyCount === 1){
+                    sellingPlanFrequencyText = widgetLabels['appstle.subscription.wg.monthFrequencyTextV2']
+                    }
+                  
+                     if(sellingPlanFrequency?.frequencyInterval === "WEEK" && sellingPlanFrequency?.frequencyCount > 1){
+                    sellingPlanFrequencyText = widgetLabels['appstle.subscription.wg.weeksFrequencyTextV2']
+                    }
+                  
+                     if(sellingPlanFrequency?.frequencyInterval === "WEEK" && sellingPlanFrequency?.frequencyCount === 1){
+                    sellingPlanFrequencyText = widgetLabels['appstle.subscription.wg.weekFrequencyTextV2']
+                    }
+                  
+                     if(sellingPlanFrequency?.frequencyInterval === "DAY" && sellingPlanFrequency?.frequencyCount > 1){
+                    sellingPlanFrequencyText = widgetLabels['appstle.subscription.wg.daysFrequencyTextV2']
+                    }
+                  
+                  if(sellingPlanFrequency?.frequencyInterval === "DAY" && sellingPlanFrequency?.frequencyCount === 1){
+                    sellingPlanFrequencyText = widgetLabels['appstle.subscription.wg.dayFrequencyTextV2']
+                    } 
+                
+                  if(sellingPlanFrequency?.frequencyInterval === "YEAR" && sellingPlanFrequency?.frequencyCount > 1){
+                    sellingPlanFrequencyText = widgetLabels['appstle.subscription.wg.yearsFrequencyTextV2']
+                    }
+                
+                  if(sellingPlanFrequency?.frequencyInterval === "YEAR" && sellingPlanFrequency?.frequencyCount === 1){
+                    sellingPlanFrequencyText = widgetLabels['appstle.subscription.wg.yearFrequencyTextV2']
+                    }
+                }
+
+
                    var sellingPlanDetails =    {
                     "name": sellingPlan.name,
                     "description": sellingPlan.description,
@@ -317,9 +360,11 @@ var appstleInit = function () {
                     "totalPrice": totalPrice,
                     "secondPrice": secondPrice,
                     "secondFormattedPrice": secondFormattedPrice,
+                    "sellingPlanFrequencyText": sellingPlanFrequencyText,
                     "discountText": priceAdjustment?.value ? discountText : null,
 					          "formattedDiscountText": priceAdjustment?.value ? buildDiscountText(discountText) : '',
-                    "isChecked": (subIndex == 0 && RSConfig?.subscriptionOptionSelectedByDefault) ? true : false
+                    "isChecked": (subIndex == 0 && RSConfig?.subscriptionOptionSelectedByDefault) ? true : false,
+                    "formattedPrepaidPerDeliveryPriceText": buildPrepaidPerDeliveryPriceText(formattedPrice)
                   }
                   jQuery.extend(sellingPlanDetails, JSON.parse(JSON.stringify(getSellingPlanDetails(sellingPlan.id))))
                   sellingPlanDetails["isFrequencySubsequent"] = sellingPlanDetails.frequencyCount > 1;
@@ -421,6 +466,7 @@ var appstleInit = function () {
 
             if (standAloneElement) {
               atcButton = standAloneElement;
+              standAloneElement.addClass('appstle_stand_alone_selector_processed');
             }
 
             var purchaseOptionsText;
@@ -634,7 +680,7 @@ var appstleInit = function () {
 
 
         function urlIsAccountPage() {
-          return window.location.pathname === '/account'
+          return window.location.pathname === '/account' || window.location.pathname?.endsWith('/account') 
           // if(window.location.pathname.includes('/account') || window.location.pathname === '/account')
           // {
           //   return true
@@ -858,6 +904,18 @@ var appstleInit = function () {
 			}
           } catch (e) {
           }
+          return value;
+        }
+
+       function getCurrentSellingPlanId() {
+          var value = null;
+          try {
+            if (($('.appstleSellingPlan' + widgetId).attr('type'))==='radio'){
+              value = $("input[type='radio'].appstleSellingPlan" + widgetId +":checked").val();
+            } else {
+              value = $('.appstleSellingPlan' + widgetId).val()
+            }
+          } catch (e) {}
           return value;
         }
 
@@ -1263,7 +1321,7 @@ var appstleInit = function () {
             jQuery('#appstle_subscription_widget' + widgetId + ' .appstle_subscription_wrapper_option.appstle_sellingplan_wrapper').removeClass('appstle_selected_background');
             subsOption.addClass('appstle_hide_subsOption')
           }
-          updateFormFields(getSelectedSellingPlanId());
+          updateFormFields(getCurrentSellingPlanId());
         }
 
         function updateFormFields(sellingPlan) {
@@ -1281,39 +1339,92 @@ var appstleInit = function () {
             }
             var currentFields = JSON.parse(sellingPlanFields?.formFieldJson || null);
             if (currentFields && currentFields.length > 0) {
+              wrapper.insertBefore('#appstle_subscription_widget' + widgetId + ' .appstle_widget_title');
               currentFields.forEach(function(field ,index) {
                   if (field['type'] === 'date') {
                     wrapper.append(jQuery(`
                     <div class="appstleOrderDatePicker" ${field["visible"] ? '' : 'style="display: none;"'}>
                       <label class="appstleFormFieldLabel appstleOrderDatePickerLabel" for="properties[_order-date]">${field['label']}</label>
-                      <input name="properties[_order-date-non-iso]" value="${getLocaleDate()}"  class="appstle_form_field_input" type="datetime-local">
-                      <input name="properties[_order-date]" value="${new Date().toISOString()}" class="appstle_form_field_input_iso" type="hidden">
+                      <div class="as-date-input-wrapper">
+                        <input class="appstle_form_field_input" type="text">
+                        <input class="appstle_form_field_input_alternate" type="hidden">
+                        <input name="properties[_order-date]" value="" class="appstle_form_field_input_iso" type="hidden">
+                      </div>
+                    </div>`
+                    ))
+                    getJqueryUIFromCDN();
+                    attatchDatePicker(field['config']);
+                  } else if (field['type'] === 'text') {
+                    wrapper.append(jQuery(`
+                    <div class="appstleCustomTextField" ${field["visible"] ? '' : 'style="display: none;"'}>
+                      <label class="appstleFormFieldLabel appstleCustomTextFieldLabel" for="properties[${field['name']}]">${field['label']}</label>
+                      <div class="as-customTextField-wrapper">
+                        <input name="properties[${field['name']}]" value="" type="text" class="appstle_form_field_text_input">
+                      </div>
                     </div>`
                     ))
                   }
               })
-              wrapper.insertBefore('#appstle_subscription_widget' + widgetId + ' .appstle_widget_title')
-              jQuery('#appstle_subscription_widget' + widgetId + ' .appstle_form_field_input').on('change', function(event) {
-                if (new Date(event.target.value) < new Date()) {
-                  jQuery('.appstle_form_field_input').val(getLocaleDate());
-
-                  jQuery('.appstle_form_field_input').attr('value', getLocaleDate());
-                  jQuery('.appstle_form_field_input_iso').attr('value', new Date().toISOString().split('.')[0] + "Z");
-                  jQuery('.appstle_form_field_input_iso').val(new Date().toISOString().split('.')[0] + "Z");
-                }
+              jQuery('#appstle_subscription_widget' + widgetId + ' .appstle_form_field_input_alternate').on('change', function(event) {
                // jQuery('.appstle_form_field_input').attr('min', getLocaleDate());
-                jQuery('.appstle_form_field_input_iso').attr('value', new Date(event.target.value).toISOString().split('.')[0] + "Z")
-                jQuery('.appstle_form_field_input_iso').val(new Date(event.target.value).toISOString().split('.')[0] + "Z")
+                var utcDate = event.target.value + "T" + new Date().toISOString().split("T")[1];
+                jQuery('.appstle_form_field_input_iso').attr('value', new Date(utcDate).toISOString().split('.')[0] + "Z")
+                jQuery('.appstle_form_field_input_iso').val(new Date(utcDate).toISOString().split('.')[0] + "Z")
              })
             }
           }
         }
 
-        var getLocaleDate = () => {
-          var dt = new Date();
-          var off = dt.getTimezoneOffset() * 60000
-          var newdt = new Date(dt - off).toISOString()
-          return newdt.slice(0, 19)
+       function getJqueryUIFromCDN() {
+        if (!jQuery('.jqueryUIFetched').length) {
+          if (typeof jQuery.datepicker == 'undefined') {
+            var jQueryUI = document.createElement('script');
+            jQueryUI.src = 'https://code.jquery.com/ui/1.13.2/jquery-ui.min.js';
+            jQueryUI.type = 'text/javascript';
+            head.appendChild(jQueryUI);
+  
+            var jQueryUICss = document.createElement('link');
+            jQueryUICss.href = 'https://code.jquery.com/ui/1.13.2/themes/base/jquery-ui.css';
+            jQueryUICss.rel = 'stylesheet';
+            head.appendChild(jQueryUICss);
+            
+            jQuery('html').addClass('jqueryUIFetched');
+          }
+        }
+        
+       }
+
+       function attatchDatePicker(config) {
+        var currentDate = new Date();
+        if (jQuery.datepicker) {
+          if (jQuery('#appstle_subscription_widget' + widgetId + ' .appstle_form_field_input_iso').length) {
+            var defaultOptions = {
+              altField: '#appstle_subscription_widget' + widgetId + ' .appstle_form_field_input_alternate',
+              altFormat: "yy-mm-dd",
+              autoSize: true,
+              minDate: currentDate,
+              showOn: "both",
+              buttonImage: "https://ik.imagekit.io/mdclzmx6brh/calendar_month_FILL0_wght400_GRAD0_opsz48_iJLonfrRJ.png",
+              defaultDate: currentDate,
+              currentText: "Now",
+              onSelect: function() {
+                // $(this).change();
+                $(this).parents('.as-date-input-wrapper').find('input').trigger('change')
+            }
+            }
+            if (config) {
+              config = JSON.parse(config)
+            } else {
+              config = {}
+            }
+            var dateOptions = jQuery.extend({}, defaultOptions, config)
+            jQuery('#appstle_subscription_widget' + widgetId + ' .appstle_form_field_input').datepicker(dateOptions);
+            jQuery('#appstle_subscription_widget' + widgetId + ' .appstle_form_field_input').datepicker( "setDate", currentDate );
+            jQuery('#appstle_subscription_widget' + widgetId + ' .appstle_form_field_input').parents('.as-date-input-wrapper').find('input').trigger('change');
+          }
+        } else {
+          setTimeout(() => attatchDatePicker(config), 30)
+        }
        }
 
 		function createJsonformat() {
@@ -1806,7 +1917,7 @@ span.appstle_lowercase.appstle_sellingPlan_price {
   font-weight: bold;
 }
 
-#appstle_subscription_widget${widgetId} .appstle_form_field_input {
+#appstle_subscription_widget${widgetId} .appstle_form_field_input, #appstle_subscription_widget${widgetId} .appstle_form_field_text_input {
   width: 100%;
   padding-left: 20px;
   padding-right: 20px;
@@ -1819,6 +1930,36 @@ span.appstle_lowercase.appstle_sellingPlan_price {
 
 .appstle_fields_wrapper {
   margin-bottom: 20px;
+}
+.as-date-input-wrapper {
+  position: relative;
+}
+
+.as-date-input-wrapper .ui-datepicker-trigger {
+  position: absolute;
+  height: 100%;
+  width: 40px;
+  right: 0;
+  top: 0;
+}
+
+.as-date-input-wrapper .ui-datepicker-trigger img {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  width: 28px;
+  transform: translate(-50%, -50%);
+}
+
+span.as-formattedPrepaidPerDeliveryPriceText {
+  font-size: 10px;
+  margin-left: 3px;
+  opacity: 0.8;
+}
+
+.appstle_span_wrapper {
+  display: flex;
+  align-items: center;
 }
 
 
@@ -1844,7 +1985,7 @@ span.appstle_lowercase.appstle_sellingPlan_price {
       }
 
       function renderStandAloneWidget() {
-        var standaloneElements = Array.prototype.slice.call(jQuery(".appstle_stand_alone_selector"));
+        var standaloneElements = Array.prototype.slice.call(jQuery(".appstle_stand_alone_selector:not(.appstle_stand_alone_selector_processed)"));
           let index = -1
           function attatchWidgetToStandAloneElement() {
               if (standaloneElements?.length) {
