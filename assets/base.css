@@ -3109,3 +3109,7 @@ a.slider-arrow:nth-of-type(2) {
 #headlessui-portal-root .rdp-day_selected {
   background-color: #db60a0;
 }
+.swal-button--confirm.swal-button {
+  background-color: #fff;
+  color: #000;
+}
