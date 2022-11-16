@@ -3130,6 +3130,7 @@ a.slider-arrow:nth-of-type(2) {
 }
 #MainContent .as-button--cancelsub {
   border: 1px solid #db60a0;
+  color: #333;
 }
 #MainContent .as-order-now-btn,
 #MainContent .as-edit-discount_primary-button,
