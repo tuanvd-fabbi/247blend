@@ -3111,7 +3111,6 @@ a.slider-arrow:nth-of-type(2) {
 #MainContent .as-skip-order-btn {
   background-color: #fff;
   border: 1px solid #000;
-  border-radius: 50px;
   color: #333;
   font-family: var(--font-jp);
 }
@@ -3128,12 +3127,15 @@ a.slider-arrow:nth-of-type(2) {
 #MainContent .as-order-now-btn,
 #MainContent .as-edit-discount_primary-button {
   background-color: #000;
-  border-radius: 50px;
 }
 #MainContent .as-button--cancelsub {
-  border-radius: 50px;
   border: 1px solid #db60a0;
 }
+#MainContent .as-order-now-btn,
+#MainContent .as-edit-discount_primary-button,
+#MainContent .as-button--cancelsub,
+#MainContent .as-see-more-button,
+#MainContent .as-skip-order-btn,
 #MainContent .as-button--pause {
   border-radius: 50px;
 }
