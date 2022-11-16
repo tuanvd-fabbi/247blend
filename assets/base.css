@@ -3131,12 +3131,16 @@ a.slider-arrow:nth-of-type(2) {
   border: 1px solid #db60a0;
   color: #db60a0;
 }
+.swal-button--confirm.swal-button {
+  background-color: transparent;
+}
 .swal-button--confirm.swal-button,
 #headlessui-portal-root .as-button_modal-close,
 #MainContent .as-button--pause {
   border: 1px solid #000;
   color: #333;
 }
+.swal-button--confirm.swal-button,
 #headlessui-portal-root .as-button_modal-primary,
 #headlessui-portal-root .as-button_modal-close,
 #MainContent .as-order-now-btn,
