@@ -3122,3 +3122,7 @@ a.slider-arrow:nth-of-type(2) {
   background-color: #fff;
   color: #333;
 }
+#MainContent .as-order-now-btn {
+  background-color: #000;
+  border-radius: 50px;
+}
