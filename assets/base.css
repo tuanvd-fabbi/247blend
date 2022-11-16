@@ -3139,6 +3139,7 @@ a.slider-arrow:nth-of-type(2) {
   border: 1px solid #000;
   color: #333;
 }
+#headlessui-portal-root .as-button_modal-primary,
 #MainContent .as-order-now-btn,
 #MainContent .as-edit-discount_primary-button,
 #MainContent .as-button--cancelsub,
