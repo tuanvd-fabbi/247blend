@@ -3097,6 +3097,11 @@ a.slider-arrow:nth-of-type(2) {
   background-color: #EDB0D0;
   color: #fff;
 }
+#MainContent .as-pause-badge {
+  background-color: transparent;
+  color: #909298;
+  border: 1px solid #909298;
+}
 #MainContent .as-see-more-button {
   background-color: #fff;
   border: 1px solid #333;
