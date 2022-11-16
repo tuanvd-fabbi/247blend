@@ -3126,8 +3126,8 @@ a.slider-arrow:nth-of-type(2) {
   background-color: #fff;
   color: #333;
 }
+#headlessui-portal-root .as-button_modal-primary,
 #MainContent .as-order-now-btn,
-#MainContent .as-button_modal-primary,
 #MainContent .as-edit-discount_primary-button {
   background-color: #000;
 }
