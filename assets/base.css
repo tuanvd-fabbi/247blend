@@ -3096,6 +3096,9 @@ a.slider-arrow:nth-of-type(2) {
 #MainContent .as-active-badge {
   background-color: #EDB0D0;
   color: #fff;
+}#MainContent .as-close-badge {
+  background-color: #909298;
+  color: #E9E9EA;
 }
 #MainContent .as-pause-badge {
   background-color: transparent;
