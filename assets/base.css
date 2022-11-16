@@ -3091,13 +3091,14 @@ a.slider-arrow:nth-of-type(2) {
 }
 
 .appstle-as-cp-wrapper-portal {
-  background-color: #F4F4F4;
+  background-color: #f4f4f4;
 }
 #MainContent .as-active-badge {
-  background-color: #EDB0D0;
+  background-color: #edb0d0;
   color: #fff;
-}#MainContent .as-close-badge {
-  background-color: #E9E9EA;
+}
+#MainContent .as-close-badge {
+  background-color: #e9e9ea;
   color: #909298;
 }
 #MainContent .as-pause-badge {
@@ -3105,7 +3106,9 @@ a.slider-arrow:nth-of-type(2) {
   color: #909298;
   border: 1px solid #909298;
 }
-#MainContent .as-see-more-button, #MainContent .as-skip-order-btn {
+#MainContent .as-see-more-button,
+#MainContent .as-button--pause,
+#MainContent .as-skip-order-btn {
   background-color: #fff;
   border: 1px solid #000;
   border-radius: 50px;
@@ -3122,7 +3125,11 @@ a.slider-arrow:nth-of-type(2) {
   background-color: #fff;
   color: #333;
 }
-#MainContent .as-order-now-btn, #MainContent .as-edit-discount_primary-button {
+#MainContent .as-order-now-btn,
+#MainContent .as-edit-discount_primary-button {
   background-color: #000;
   border-radius: 50px;
+}
+#MainContent .as-button--cancelsub {
+  
 }
