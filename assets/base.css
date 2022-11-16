@@ -3097,8 +3097,8 @@ a.slider-arrow:nth-of-type(2) {
   background-color: #EDB0D0;
   color: #fff;
 }#MainContent .as-close-badge {
-  background-color: #909298;
-  color: #E9E9EA;
+  background-color: #E9E9EA;
+  color: #909298;
 }
 #MainContent .as-pause-badge {
   background-color: transparent;
@@ -3109,7 +3109,7 @@ a.slider-arrow:nth-of-type(2) {
   background-color: #fff;
   border: 1px solid #333;
   border-radius: 40px;
-  color: #000;
+  color: #333;
 }
 #MainContent .as-tab-list button {
   border-color: #db60a0;
@@ -3119,5 +3119,5 @@ a.slider-arrow:nth-of-type(2) {
 }
 .swal-button--confirm.swal-button {
   background-color: #fff;
-  color: #000;
+  color: #333;
 }
