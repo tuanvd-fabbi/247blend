@@ -3110,6 +3110,8 @@ a.slider-arrow:nth-of-type(2) {
   border: 1px solid #000;
   border-radius: 50px;
   color: #333;
+  font-size: 18px;
+  font-family: var(--font-jp);
 }
 #MainContent .as-tab-list button {
   border-color: #db60a0;
