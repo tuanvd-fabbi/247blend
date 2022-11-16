@@ -3134,3 +3134,6 @@ a.slider-arrow:nth-of-type(2) {
   border-radius: 50px;
   border: 1px solid #db60a0;
 }
+#MainContent .as-button--pause {
+  border-radius: 50px;
+}
