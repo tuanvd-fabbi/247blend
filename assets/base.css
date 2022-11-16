@@ -3093,6 +3093,9 @@ a.slider-arrow:nth-of-type(2) {
 .appstle-as-cp-wrapper-portal {
   background-color: #f4f4f4;
 }
+#MainContent .as-cp-wrapper {
+  font-family: var(--font-jp);
+}
 #MainContent .as-active-badge {
   background-color: #edb0d0;
   color: #fff;
