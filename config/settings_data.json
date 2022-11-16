@@ -123,7 +123,7 @@
     "show_cart_note": false,
     "cart_drawer_collection": "",
     "checkout_logo_position": "center",
-    "checkout_accent_color": "#1878b9",
+    "checkout_accent_color": "#333333",
     "checkout_button_color": "#333333",
     "sections": {
       "announcement-bar": {
