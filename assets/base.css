@@ -3101,7 +3101,6 @@ a.slider-arrow:nth-of-type(2) {
   background-color: #e9e9ea;
   color: #909298;
 }
-#MainContent .as-button--pause,
 #MainContent .as-pause-badge {
   background-color: transparent;
   color: #909298;
@@ -3131,6 +3130,10 @@ a.slider-arrow:nth-of-type(2) {
 #MainContent .as-button--cancelsub {
   border: 1px solid #db60a0;
   color: #db60a0;
+}
+#MainContent .as-button--pause {
+  border: 1px solid #000;
+  color: #333;
 }
 #MainContent .as-order-now-btn,
 #MainContent .as-edit-discount_primary-button,
