@@ -3148,6 +3148,7 @@ a.slider-arrow:nth-of-type(2) {
 #MainContent .as-button--cancelsub,
 #MainContent .as-see-more-button,
 #MainContent .as-skip-order-btn,
+#MainContent .as-button--resume,
 #MainContent .as-button--pause {
   border-radius: 50px;
 }
