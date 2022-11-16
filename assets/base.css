@@ -3155,3 +3155,9 @@ a.slider-arrow:nth-of-type(2) {
 #MainContent .appstle_order-detail_update-button {
   color: #333;
 }
+
+#MainContent .as-rounded-full.as-status {
+  background-color: transparent;
+  color: #909298;
+  border: 1px solid #909298;
+}
