@@ -3131,5 +3131,6 @@ a.slider-arrow:nth-of-type(2) {
   border-radius: 50px;
 }
 #MainContent .as-button--cancelsub {
-  
+  border-radius: 50px;
+  border: 1px solid #db60a0;
 }
