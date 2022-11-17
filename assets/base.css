@@ -3122,15 +3122,17 @@ a.slider-arrow:nth-of-type(2) {
 #MainContent .as-tab-list button {
   border-color: #db60a0;
 }
+#MainContent .as-bg-yellow-100.as-text-yellow-800 {
+  color: #fff;
+}
 #MainContent .as-bg-yellow-100.as-text-yellow-800,
 #headlessui-portal-root .rdp-day_selected {
   background-color: #db60a0;
 }
 
-
 #headlessui-portal-root .as-button_modal-primary:hover,
 #MainContent .as-order-now-btn:hover,
-#MainContent .as-edit-discount_primary-button:hover ,
+#MainContent .as-edit-discount_primary-button:hover,
 #headlessui-portal-root .as-button_modal-primary,
 #MainContent .as-order-now-btn,
 #MainContent .as-edit-discount_primary-button {
