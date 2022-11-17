@@ -3190,7 +3190,7 @@ a.slider-arrow:nth-of-type(2) {
   font-weight: normal;
 }
 #MainContent .pagination li:not(:last-child) {
-  margin-right: 10px;
+  margin-right: 15px;
 }
 #MainContent .pagination li.active a {
   font-size: 13px;
