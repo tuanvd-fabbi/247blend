@@ -3175,3 +3175,7 @@ a.slider-arrow:nth-of-type(2) {
   color: #909298;
   border: 1px solid #909298;
 }
+#MainContent .pagination li:first-child,
+#MainContent .pagination li:last-child {
+  display: none;
+}
