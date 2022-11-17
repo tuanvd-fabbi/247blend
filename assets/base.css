@@ -3100,6 +3100,7 @@ a.slider-arrow:nth-of-type(2) {
   background-color: #edb0d0;
   color: #fff;
 }
+#MainContent .as-bg-green-100.as-text-green-800,
 #MainContent .as-close-badge {
   background-color: #e9e9ea;
   color: #909298;
