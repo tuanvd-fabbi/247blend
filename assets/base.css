@@ -3118,6 +3118,7 @@ a.slider-arrow:nth-of-type(2) {
   color: #333;
   font-family: var(--font-jp);
 }
+#MainContent .as-bg-yellow-100.as-text-yellow-800,
 #MainContent .as-tab-list button {
   border-color: #db60a0;
 }
@@ -3143,6 +3144,7 @@ a.slider-arrow:nth-of-type(2) {
 }
 .swal-button--confirm.swal-button:hover,
 #headlessui-portal-root .as-button_modal-close:hover,
+#MainContent .as-button--pause:hover,
 .swal-button--confirm.swal-button,
 #headlessui-portal-root .as-button_modal-close,
 #MainContent .as-button--pause {
