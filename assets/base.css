@@ -3134,7 +3134,6 @@ a.slider-arrow:nth-of-type(2) {
 #MainContent .as-edit-discount_primary-button {
   background-color: #000;
 }
-#MainContent .as-button--cancelsub:hover,
 #MainContent .as-button--cancelsub {
   border: 1px solid #db60a0;
   color: #db60a0;
@@ -3144,7 +3143,6 @@ a.slider-arrow:nth-of-type(2) {
 }
 .swal-button--confirm.swal-button:hover,
 #headlessui-portal-root .as-button_modal-close:hover,
-#MainContent .as-button--pause:hover,
 .swal-button--confirm.swal-button,
 #headlessui-portal-root .as-button_modal-close,
 #MainContent .as-button--pause {
