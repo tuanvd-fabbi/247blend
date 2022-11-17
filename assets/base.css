@@ -3189,3 +3189,8 @@ a.slider-arrow:nth-of-type(2) {
   font-family: var(--font-number);
   font-weight: normal;
 }
+#MainContent .pagination li.active a {
+  font-size: 13px;
+  background-color: #909298;
+  color: #ffffff;
+}
