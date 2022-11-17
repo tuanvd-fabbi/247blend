@@ -3109,6 +3109,8 @@ a.slider-arrow:nth-of-type(2) {
   color: #909298;
   border: 1px solid #909298;
 }
+#MainContent .as-see-more-button:hover,
+#MainContent .as-skip-order-btn:hover,
 #MainContent .as-see-more-button,
 #MainContent .as-skip-order-btn {
   background-color: #fff;
@@ -3122,11 +3124,17 @@ a.slider-arrow:nth-of-type(2) {
 #headlessui-portal-root .rdp-day_selected {
   background-color: #db60a0;
 }
+
+
+#headlessui-portal-root .as-button_modal-primary:hover,
+#MainContent .as-order-now-btn:hover,
+#MainContent .as-edit-discount_primary-button:hover ,
 #headlessui-portal-root .as-button_modal-primary,
 #MainContent .as-order-now-btn,
 #MainContent .as-edit-discount_primary-button {
   background-color: #000;
 }
+#MainContent .as-button--cancelsub:hover,
 #MainContent .as-button--cancelsub {
   border: 1px solid #db60a0;
   color: #db60a0;
@@ -3134,6 +3142,9 @@ a.slider-arrow:nth-of-type(2) {
 .swal-button--confirm.swal-button {
   background-color: transparent;
 }
+.swal-button--confirm.swal-button:hover,
+#headlessui-portal-root .as-button_modal-close:hover,
+#MainContent .as-button--pause:hover,
 .swal-button--confirm.swal-button,
 #headlessui-portal-root .as-button_modal-close,
 #MainContent .as-button--pause {
