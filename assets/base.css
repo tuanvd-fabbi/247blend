@@ -3181,11 +3181,11 @@ a.slider-arrow:nth-of-type(2) {
 }
 #MainContent .pagination li a {
   border: 1px solid #909298;
-    padding: 10px 14px;
-    width: unset;
-    color: #333333;
-    font-size: 13px;
-    border-radius: 4px;
-    font-family: var(--font-number);
-    font-weight: normal;
+  padding: 11px 15px;
+  width: unset;
+  color: #333333;
+  font-size: 13px;
+  border-radius: 4px;
+  font-family: var(--font-number);
+  font-weight: normal;
 }
