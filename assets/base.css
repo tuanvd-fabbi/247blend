@@ -3119,10 +3119,10 @@ a.slider-arrow:nth-of-type(2) {
   color: #333;
   font-family: var(--font-jp);
 }
-#MainContent .as-bg-yellow-100.as-text-yellow-800,
 #MainContent .as-tab-list button {
   border-color: #db60a0;
 }
+#MainContent .as-bg-yellow-100.as-text-yellow-800,
 #headlessui-portal-root .rdp-day_selected {
   background-color: #db60a0;
 }
