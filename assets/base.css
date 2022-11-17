@@ -3189,7 +3189,7 @@ a.slider-arrow:nth-of-type(2) {
   font-family: var(--font-number);
   font-weight: normal;
 }
-#MainContent .pagination li a:not(:last-child) {
+#MainContent .pagination li:not(:last-child) {
   margin-right: 10px;
 }
 #MainContent .pagination li.active a {
