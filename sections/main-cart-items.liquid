@@ -74,7 +74,7 @@
                             height="{{ 150 | divided_by: item.image.aspect_ratio | ceil }}"
                           >
                         </div>
-                        {{item.type}}
+                        {{item | json}}
                     {% endif %}
                   </td>
 
