@@ -2024,10 +2024,12 @@
         integrity="sha256-o88AwQnZB+VDvE9tvIXrMQaPlFFSUTR+nldQm1LuPXQ=" crossorigin="anonymous"></script>
 <script>
   $('.product-form__submit').on('click', function () {
-    const formData = {
-      quantity: 1,
-      id: $('select[name="gift_card"]').val(),
-    };
+    const formData = [
+      {
+        quantity: 1,
+        id: $('select[name="gift_card"]').val(),
+      }
+    ];
     $.ajax({
       url: '/cart/add',
       type: 'post',
