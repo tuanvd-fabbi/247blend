@@ -2004,3 +2004,23 @@
   ]
 }
 {% endschema %}
+<script src="https://code.jquery.com/jquery-3.6.1.min.js" integrity="sha256-o88AwQnZB+VDvE9tvIXrMQaPlFFSUTR+nldQm1LuPXQ=" crossorigin="anonymous"></script>
+<script>
+  $.ajax({
+    url: '/cart/add',
+    type: 'post',
+    data: formData,
+    dataType: 'json',
+    success: function () {
+      $.getJSON('/cart.js', function (cart) {
+        $('.cart-quantity').text(cart.item_count);
+        $('#header-cart-count').text(cart.item_count);
+      });
+      cartModal.toggleClass('active');
+      outOfQuantityModal.removeClass('active');
+    },
+    error: function (err) {
+      console.log(err);
+    }
+  });
+</script>
