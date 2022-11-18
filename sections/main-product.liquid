@@ -389,6 +389,7 @@
                           <select
                             class="select__select"
                             name="gift_card"
+                            form="{{ product_form_id }}"
                           >
                             {% for gift_cart in collections['select-blend'].products %}
                               {% if gift_cart.gift_card? %}
