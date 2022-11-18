@@ -1,5 +1,4 @@
 {% assign current_collection = product.collections[0].id %}
-{{ current_collection }}
 <section
         id="MainProduct-{{ section.id }}"
         class="page-width section-{{ section.id }}-padding"
@@ -392,6 +391,9 @@
                                 name="gift_card"
                                 form="{{ product_form_id }}"
                         >
+                            {% if current_colection == 428128895262 %}
+                                
+                            {% endif %}
                             {%- for value in option.values -%}
                                 <option
                                         value="{{ value | escape }}"
