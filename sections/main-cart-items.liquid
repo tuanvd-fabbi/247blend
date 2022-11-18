@@ -149,8 +149,10 @@
                       </ul>
 
                       {% for gift_card in cart.items %}
-                        {% if gift_card.product.collection[0] == 428146327838 %}
-                          
+                        {% if gift_card.product.collections[0] == 428146327838 %}
+                          <ul>
+                            <li>{{ gift_card.title }}</li>
+                          </ul>
                         {% endif %}
                       {% endfor %}
                     </td>
