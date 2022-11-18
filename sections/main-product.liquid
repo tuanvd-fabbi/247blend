@@ -798,11 +798,13 @@ tessstttttttt
               name="gift_card"
             >
               {% for gift_cart in collections['select-blend'].products %}
+                {% if gift_cart.gift_card? %}
                   <option
                     value="{{ gift_cart.id }}"
                   >
-                    {{ gift_cart.gift_card? }}
+                    {{ gift_cart.title }}
                   </option>
+                {% endif %}
               {% endfor %}
             </select>
             {% comment %} end gift card {% endcomment %}
