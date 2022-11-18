@@ -392,9 +392,9 @@
                                 form="{{ product_form_id }}"
                         >
                             {% if current_colection == 428128895262 %}
-                                {%- for value in option.values -%}
+                                {%- for gift_card in collections['select-blend-gift'].products -%}
                                     <option
-                                            value="{{ value | escape }}"
+                                            value="{{ gift_card.id }}"
                                             {% if option.selected_value == value %}
                                                 selected="selected"
                                             {% endif %}
