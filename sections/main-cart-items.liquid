@@ -60,7 +60,6 @@
 
             <tbody>
               {%- for item in cart.items -%}
-                {% if item.product.gift_card? == false  %}
                 <tr class="cart-item" id="CartItem-{{ item.index | plus: 1 }}">
                   <td class="cart-item__media">
                     {% if item.image %}
@@ -286,7 +285,6 @@
                     </div>
                   </td>
                 </tr>
-              {% endif %}
               {%- endfor -%}
             </tbody>
           </table>
