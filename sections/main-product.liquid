@@ -392,6 +392,7 @@
                                 name="gift_card"
                                 form="{{ product_form_id }}"
                         >
+                            {{ current_colection }}
                             {% if current_colection == 428128895262 %}
                                 {%- for gift_card in collections['select-blend-gift'].products -%}
                                     <option
