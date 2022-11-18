@@ -787,28 +787,6 @@
                 </product-recommendations>
           {%- endcase -%}
         {%- endfor -%}
-
-tessstttttttt
-
-
-            {% comment %} gift card {% endcomment %}
-
-            <select
-              class="select__select"
-              name="gift_card"
-            >
-              {% for gift_cart in collections['select-blend'].products %}
-                {% if gift_cart.gift_card? %}
-                  <option
-                    value="{{ gift_cart.id }}"
-                  >
-                    {{ gift_cart.title }}
-                  </option>
-                {% endif %}
-              {% endfor %}
-            </select>
-            {% comment %} end gift card {% endcomment %}
-
         <a href="{{ product.url }}" class="link product__view-details animate-arrow">
           {{ 'products.product.view_full_details' | t }}
           {% render 'icon-arrow' %}
