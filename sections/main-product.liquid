@@ -396,7 +396,7 @@
                                     <option
                                             value="{{ gift_card.id }}"
                                     >
-                                        {{ value }}
+                                        {{ gift_cad.title }}
                                     </option>
                                 {%- endfor -%}
                             {% endif %}
@@ -528,6 +528,7 @@
                       {{ product.variants | json }}
 
 
+
                             </script>
                         </variant-radios>
                     {%- else -%}
@@ -567,6 +568,7 @@
 
                             <script type="application/json">
                       {{ product.variants | json }}
+
 
 
                             </script>
@@ -1130,6 +1132,7 @@
       {{ product.media | where: 'media_type', 'model' | json }}
 
 
+
         </script>
         <script src="{{ 'product-model.js' | asset_url }}" defer></script>
     {%- endif -%}
@@ -1222,6 +1225,7 @@
         {%- endfor -%}
       ]
     }
+
 
 
     </script>
