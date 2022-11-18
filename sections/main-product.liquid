@@ -537,6 +537,7 @@
 
 
 
+
                             </script>
                         </variant-radios>
                     {%- else -%}
@@ -576,6 +577,7 @@
 
                             <script type="application/json">
                       {{ product.variants | json }}
+
 
 
 
@@ -1155,6 +1157,7 @@
 
 
 
+
         </script>
         <script src="{{ 'product-model.js' | asset_url }}" defer></script>
     {%- endif -%}
@@ -1247,6 +1250,7 @@
         {%- endfor -%}
       ]
     }
+
 
 
 
@@ -2057,6 +2061,18 @@
       },
       method: 'POST'
     }).then((response) => {
+      $.ajax({
+        url: '/cart/update.js',
+        type: 'POST',
+        data: {note: "Note product 1"},
+        success: function (result) {
+          window.location.href = window.location.href
+        },
+        error: function (jqxhr, status, exception) {
+          console.log(exception);
+        }
+      });
+
       return response.json();
     }).then((json) => {
       /* yay! our products were added - do something here to indicate to the user */
