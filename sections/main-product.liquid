@@ -395,6 +395,7 @@
                             {% if current_collection == 428128895262 %}
                                 {%- for gift_card in collections['select-blend-gift'].products -%}
                                     <option
+                                            data-id="{{ gift_card | json }}"
                                             value="{{ gift_card.id }}"
                                     >
                                         {{ gift_card.title }}
