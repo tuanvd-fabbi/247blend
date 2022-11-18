@@ -1975,7 +1975,7 @@
 $('#add-to-cart-btn').on('click', function() {
   const formData = {
     quantity: 1,
-    id: $('select[name="gift_card"]'),
+    id: $('select[name="gift_card"]').val(),
   };
   $.ajax({
     url: '/cart/add',
