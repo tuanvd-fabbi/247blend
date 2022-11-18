@@ -395,9 +395,6 @@
                                 {%- for gift_card in collections['select-blend-gift'].products -%}
                                     <option
                                             value="{{ gift_card.id }}"
-                                            {% if option.selected_value == value %}
-                                                selected="selected"
-                                            {% endif %}
                                     >
                                         {{ value }}
                                     </option>
