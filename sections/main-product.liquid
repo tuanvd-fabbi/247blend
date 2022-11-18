@@ -392,18 +392,17 @@
                                 form="{{ product_form_id }}"
                         >
                             {% if current_colection == 428128895262 %}
-
+                                {%- for value in option.values -%}
+                                    <option
+                                            value="{{ value | escape }}"
+                                            {% if option.selected_value == value %}
+                                                selected="selected"
+                                            {% endif %}
+                                    >
+                                        {{ value }}
+                                    </option>
+                                {%- endfor -%}
                             {% endif %}
-                            {%- for value in option.values -%}
-                                <option
-                                        value="{{ value | escape }}"
-                                        {% if option.selected_value == value %}
-                                            selected="selected"
-                                        {% endif %}
-                                >
-                                    {{ value }}
-                                </option>
-                            {%- endfor -%}
                         </select>
                         {% comment %}end section gift card{% endcomment %}
                         <div
@@ -531,6 +530,7 @@
                             <script type="application/json">
                       {{ product.variants | json }}
 
+
                             </script>
                         </variant-radios>
                     {%- else -%}
@@ -570,6 +570,7 @@
 
                             <script type="application/json">
                       {{ product.variants | json }}
+
 
                             </script>
                         </variant-selects>
@@ -1131,6 +1132,7 @@
         <script type="application/json" id="ProductJSON-{{ product.id }}">
       {{ product.media | where: 'media_type', 'model' | json }}
 
+
         </script>
         <script src="{{ 'product-model.js' | asset_url }}" defer></script>
     {%- endif -%}
@@ -1223,6 +1225,7 @@
         {%- endfor -%}
       ]
     }
+
 
     </script>
 </section>
