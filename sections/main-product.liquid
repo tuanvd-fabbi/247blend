@@ -2037,7 +2037,7 @@
     $.ajax({
       url: '/cart/add',
       type: 'post',
-      data: formData,
+      data: JSON.stringify(formData),
       dataType: 'json',
       success: function () {
         // alert('add gift ok');
