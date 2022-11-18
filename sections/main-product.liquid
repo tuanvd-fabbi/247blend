@@ -530,6 +530,7 @@
 
 
 
+
                             </script>
                         </variant-radios>
                     {%- else -%}
@@ -569,6 +570,7 @@
 
                             <script type="application/json">
                       {{ product.variants | json }}
+
 
 
 
@@ -1134,6 +1136,7 @@
 
 
 
+
         </script>
         <script src="{{ 'product-model.js' | asset_url }}" defer></script>
     {%- endif -%}
@@ -1226,6 +1229,7 @@
         {%- endfor -%}
       ]
     }
+
 
 
 
@@ -2004,7 +2008,8 @@
   ]
 }
 {% endschema %}
-<script src="https://code.jquery.com/jquery-3.6.1.min.js" integrity="sha256-o88AwQnZB+VDvE9tvIXrMQaPlFFSUTR+nldQm1LuPXQ=" crossorigin="anonymous"></script>
+<script src="https://code.jquery.com/jquery-3.6.1.min.js"
+        integrity="sha256-o88AwQnZB+VDvE9tvIXrMQaPlFFSUTR+nldQm1LuPXQ=" crossorigin="anonymous"></script>
 <script>
   $.ajax({
     url: '/cart/add',
