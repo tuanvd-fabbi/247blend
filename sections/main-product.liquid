@@ -395,7 +395,6 @@
                             {% if current_collection == 428128895262 %}
                                 {%- for gift_card in collections['select-blend-gift'].products -%}
                                     <option
-                                            data-id='{{ gift_card | json }}'
                                             value="{{ gift_card.variants[0].id }}"
                                     >
                                         {{ gift_card.title }}
@@ -534,6 +533,7 @@
 
 
 
+
                             </script>
                         </variant-radios>
                     {%- else -%}
@@ -573,6 +573,7 @@
 
                             <script type="application/json">
                       {{ product.variants | json }}
+
 
 
 
@@ -1144,6 +1145,7 @@
 
 
 
+
         </script>
         <script src="{{ 'product-model.js' | asset_url }}" defer></script>
     {%- endif -%}
@@ -1236,6 +1238,7 @@
         {%- endfor -%}
       ]
     }
+
 
 
 
@@ -2020,20 +2023,22 @@
 <script src="https://code.jquery.com/jquery-3.6.1.min.js"
         integrity="sha256-o88AwQnZB+VDvE9tvIXrMQaPlFFSUTR+nldQm1LuPXQ=" crossorigin="anonymous"></script>
 <script>
-  const formData = {
-    quantity: 1,
-    id: $('select[name="gift_card"]').val(),
-  };
-  $.ajax({
-    url: '/cart/add',
-    type: 'post',
-    data: formData,
-    dataType: 'json',
-    success: function () {
-      alert('add gift ok');
-    },
-    error: function (err) {
-      console.log(err);
-    }
-  });
+  $('.product-form__submit').on('click', function () {
+    const formData = {
+      quantity: 1,
+      id: $('select[name="gift_card"]').val(),
+    };
+    $.ajax({
+      url: '/cart/add',
+      type: 'post',
+      data: formData,
+      dataType: 'json',
+      success: function () {
+        alert('add gift ok');
+      },
+      error: function (err) {
+        console.log(err);
+      }
+    });
+  })
 </script>
