@@ -396,7 +396,7 @@
                                 {%- for gift_card in collections['select-blend-gift'].products -%}
                                     <option
                                             data-id='{{ gift_card | json }}'
-                                            value="{{ gift_card.id }}"
+                                            value="{{ gift_card.variants[0].id }}"
                                     >
                                         {{ gift_card.title }}
                                     </option>
