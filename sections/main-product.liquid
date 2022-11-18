@@ -2026,7 +2026,7 @@
   $('.product-form__submit').on('click', function () {
     const formData = [
       {
-        quantity: 1,
+        quantity: $('input[name="quantity"]').val(),
         id: $('input[name="id"]').val(),
       },
       {
