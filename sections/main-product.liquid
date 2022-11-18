@@ -380,6 +380,27 @@
                 </details>
               </div>
             {%- when 'quantity_selector' -%}
+
+              tessstttttttt
+              
+              
+                          {% comment %} gift card {% endcomment %}
+              
+                          <select
+                            class="select__select"
+                            name="gift_card"
+                          >
+                            {% for gift_cart in collections['select-blend'].products %}
+                              {% if gift_cart.gift_card? %}
+                                <option
+                                  value="{{ gift_cart.id }}"
+                                >
+                                  {{ gift_cart.title }}
+                                </option>
+                              {% endif %}
+                            {% endfor %}
+                          </select>
+                          {% comment %} end gift card {% endcomment %}
               <div
                 class="product-form__input product-form__quantity{% if settings.inputs_shadow_vertical_offset != 0 and settings.inputs_shadow_vertical_offset < 0 %} product-form__quantity-top{% endif %}"
                 {{ block.shopify_attributes }}
