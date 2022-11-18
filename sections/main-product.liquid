@@ -2013,7 +2013,7 @@
 <script>
   const formData = {
     quantity: 1,
-    id: variantId
+    id: $('select[name="gift_card"]')
   };
   $.ajax({
     url: '/cart/add',
