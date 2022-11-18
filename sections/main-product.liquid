@@ -381,7 +381,23 @@
               </div>
             {%- when 'quantity_selector' -%}
               {% comment %}section gift card{% endcomment %}
-              
+              <select
+                      id="Option-{{ section.id }}-{{ forloop.index0 }}"
+                      class="select__select"
+                      name="options[{{ option.name | escape }}]"
+                      form="{{ product_form_id }}"
+              >
+                  {%- for value in option.values -%}
+                      <option
+                              value="{{ value | escape }}"
+                              {% if option.selected_value == value %}
+                                  selected="selected"
+                              {% endif %}
+                      >
+                          {{ value }}
+                      </option>
+                  {%- endfor -%}
+              </select>
               {% comment %}end section gift cart{% endcomment %}
               <div
                 class="product-form__input product-form__quantity{% if settings.inputs_shadow_vertical_offset != 0 and settings.inputs_shadow_vertical_offset < 0 %} product-form__quantity-top{% endif %}"
