@@ -387,13 +387,13 @@
                     {%- when 'quantity_selector' -%}
                         {% comment %}section gift card{% endcomment %}
                         Gift Set
-                        {{ current_colection }}
+                        {{ current_collection }}
                         <select
                                 class="select__select"
                                 name="gift_card"
                                 form="{{ product_form_id }}"
                         >
-                            {% if current_colection == 428128895262 %}
+                            {% if current_collection == 428128895262 %}
                                 {%- for gift_card in collections['select-blend-gift'].products -%}
                                     <option
                                             value="{{ gift_card.id }}"
