@@ -534,6 +534,7 @@
 
 
 
+
                             </script>
                         </variant-radios>
                     {%- else -%}
@@ -573,6 +574,7 @@
 
                             <script type="application/json">
                       {{ product.variants | json }}
+
 
 
 
@@ -1146,6 +1148,7 @@
 
 
 
+
         </script>
         <script src="{{ 'product-model.js' | asset_url }}" defer></script>
     {%- endif -%}
@@ -1238,6 +1241,7 @@
         {%- endfor -%}
       ]
     }
+
 
 
 
@@ -2025,7 +2029,34 @@
 <script>
   $('.product-form__submit').on('click', function () {
     const formData = {
-      items: {}
+      items: [
+        {
+          quantity: 1,
+          id: 2737248338005,
+          properties: {
+            'MAF sensor': 'Without MAF port',
+            'Colour': 'Brushed Stainless'
+          }
+        },
+        {
+          quantity: 1,
+          id: 2712481398869,
+          properties: {
+            'System Type': 'DPF Back',
+            'Vehicle Year Model': '2022',
+            'Vehicle Type': 'Dual cab'
+          }
+        },
+        {
+          quantity: 1,
+          id: 4600435179605,
+          properties: {
+            'Panel Filter': 'GSL Performance Filter (+$121.90)',
+            'Colour': 'Brushed Stainless'
+          }
+        }
+
+      ]
     };
     $.ajax({
       url: '/cart/add',
