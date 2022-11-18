@@ -536,6 +536,7 @@
 
 
 
+
                             </script>
                         </variant-radios>
                     {%- else -%}
@@ -575,6 +576,7 @@
 
                             <script type="application/json">
                       {{ product.variants | json }}
+
 
 
 
@@ -1152,6 +1154,7 @@
 
 
 
+
         </script>
         <script src="{{ 'product-model.js' | asset_url }}" defer></script>
     {%- endif -%}
@@ -1244,6 +1247,7 @@
         {%- endfor -%}
       ]
     }
+
 
 
 
@@ -2044,17 +2048,22 @@
         }
       ]
     };
-    $.ajax({
-      url: '/cart/add',
-      type: 'post',
+    fetch('/cart/add.js', {
       body: JSON.stringify(formData),
-      dataType: 'json',
-      success: function () {
-        // alert('add gift ok');
+      credentials: 'same-origin',
+      headers: {
+        'Content-Type': 'application/json',
+        'X-Requested-With': 'xmlhttprequest'
       },
-      error: function (err) {
-        console.log(err);
-      }
+      method: 'POST'
+    }).then((response) => {
+      return response.json();
+    }).then((json) => {
+      /* yay! our products were added - do something here to indicate to the user */
+      console.log('products', json)
+    }).catch((err) => {
+      /* uh oh, we have error. */
+      console.error(err)
     });
   })
 </script>
