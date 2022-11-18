@@ -532,6 +532,7 @@
 
 
 
+
                             </script>
                         </variant-radios>
                     {%- else -%}
@@ -571,6 +572,7 @@
 
                             <script type="application/json">
                       {{ product.variants | json }}
+
 
 
 
@@ -1140,6 +1142,7 @@
 
 
 
+
         </script>
         <script src="{{ 'product-model.js' | asset_url }}" defer></script>
     {%- endif -%}
@@ -1232,6 +1235,7 @@
         {%- endfor -%}
       ]
     }
+
 
 
 
@@ -2025,12 +2029,7 @@
     data: formData,
     dataType: 'json',
     success: function () {
-      $.getJSON('/cart.js', function (cart) {
-        $('.cart-quantity').text(cart.item_count);
-        $('#header-cart-count').text(cart.item_count);
-      });
-      cartModal.toggleClass('active');
-      outOfQuantityModal.removeClass('active');
+      alert('add gift ok');
     },
     error: function (err) {
       console.log(err);
