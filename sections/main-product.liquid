@@ -1970,3 +1970,24 @@
   ]
 }
 {% endschema %}
+
+<script> 
+$('#add-to-cart-btn').on('click', function() {
+  const formData = {
+    quantity: 1,
+    id: variantId
+  };
+  $.ajax({
+    url: '/cart/add',
+    type: 'post',
+    data: formData,
+    dataType: 'json',
+    success: function () {
+      alert('add-cart-success');
+    },
+    error: function (err) {
+      console.log(err);
+    }
+  });
+})
+</script>
