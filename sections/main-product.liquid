@@ -2048,13 +2048,6 @@
           properties: {
             note: "Note product 3"
           }
-        },
-        {
-          quantity: 1,
-          id: $('select[name="gift_card"]').val(),
-          properties: {
-            note: "Note product 3"
-          }
         }
       ]
     };
@@ -2067,19 +2060,7 @@
       },
       method: 'POST'
     }).then((response) => {
-      // $.ajax({
-      //   url: '/cart/update.js',
-      //   type: 'POST',
-      //   data: {note: "Note product 1"},
-      //   success: function (result) {
-      //     window.location.href = window.location.href
-      //   },
-      //   error: function (jqxhr, status, exception) {
-      //     console.log(exception);
-      //   }
-      // });
-
-      return response.json();
+      console.log(response.json())
     }).then((json) => {
       /* yay! our products were added - do something here to indicate to the user */
       console.log('products', json)
