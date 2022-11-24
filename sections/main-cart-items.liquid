@@ -5,7 +5,7 @@
 {{ 'component-discounts.css' | asset_url | stylesheet_tag }}
 {{ 'component-loading-overlay.css' | asset_url | stylesheet_tag }}
 {% for li in order.lineItems %}
-    {% if li.product.type == 'トライアル' %}
+    {% if li.product.id == 'トライアル' %}
         order_trial_{{ li.product.id }}
     {% endif %}
 {% endfor %}
