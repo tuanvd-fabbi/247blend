@@ -381,7 +381,7 @@
   //   /* uh oh, we have error. */
   //   console.error(err)
   // });
-  const session = await Shopify.Utils.loadCurrentSession(
+  const session = Shopify.Utils.loadCurrentSession(
     req,
     res
   );
@@ -389,7 +389,7 @@
     session.shop,
     session.accessToken
   );
-  const response = await client.query({data: '{your_query}'});
+  const response = client.query({data: '{your_query}'});
   const queryString = `{
   products (first: 3) {
     edges {
@@ -405,7 +405,7 @@
     session.shop,
     session.accessToken
   );
-  const products = await client.query({
+  const products = client.query({
     data: queryString,
   });
   console.log(products)
