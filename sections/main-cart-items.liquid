@@ -384,8 +384,7 @@
   fetch('https://{shop}.myshopify.com/api/{api_version}/graphql.json', {
     method: 'post',
     headers: {
-          'Content-Type': 'application/json',
-          'X-Requested-With': 'xmlhttprequest'
-        },
+      'X-Shopify-Storefront-Access-Token': {{ STORE_FRONT_ACCESS_KEY }},
+    },
   })
 </script>
