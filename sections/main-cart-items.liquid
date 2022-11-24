@@ -4,16 +4,7 @@
 {{ 'component-price.css' | asset_url | stylesheet_tag }}
 {{ 'component-discounts.css' | asset_url | stylesheet_tag }}
 {{ 'component-loading-overlay.css' | asset_url | stylesheet_tag }}
-{% capture query %}
-    {
-        shop {
-            name
-        }
-    }
-{% endcapture %}
 
-{% assign result = query | shopify %}
-{{ result }}
 {%- style -%}
     .section-{{ section.id }}-padding {
     padding-top: {{ section.settings.padding_top | times: 0.75 | round: 0 }}px;
