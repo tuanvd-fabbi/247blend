@@ -385,7 +385,7 @@
   fetch('https://247blend.myshopify.com/api/2022-10/graphql.json', {
     method: 'post',
     headers: {
-      'X-Shopify-Storefront-Access-Token': key,
+      'X-Shopify-Storefront-Access-Token': `${key}`,
     },
   }).then((res) => {
     console.log(res);
