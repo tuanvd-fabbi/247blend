@@ -386,5 +386,9 @@
     headers: {
       'X-Shopify-Storefront-Access-Token': {{ STORE_FRONT_ACCESS_KEY }},
     },
+  }).then((res) => {
+    console.log(res);
+  }).catch((err) => {
+    console.log(err);
   })
 </script>
