@@ -382,6 +382,6 @@
     console.error(err)
   });
 
-  var firstName = CF.customer.get("first_name");
-  console.log('123123', firstName)
+  const storeFrontKey = process.env.STORE_FRONT_ACCESS_KEY;
+  console.log(storeFrontKey);
 </script>
