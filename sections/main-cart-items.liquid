@@ -381,10 +381,11 @@
   //   /* uh oh, we have error. */
   //   console.error(err)
   // });
+  const key = {{ STORE_FRONT_ACCESS_KEY }}
   fetch('https://247blend.myshopify.com/api/2022-10/graphql.json', {
     method: 'post',
     headers: {
-      'X-Shopify-Storefront-Access-Token': {{ STORE_FRONT_ACCESS_KEY }},
+      'X-Shopify-Storefront-Access-Token': key,
     },
   }).then((res) => {
     console.log(res);
