@@ -382,7 +382,6 @@
   //   console.error(err)
   // });
   testGraphQL();
-  import Shopify from "@shopify/shopify-api";
   async function testGraphQL() {
     const session = await Shopify.Utils.loadCurrentSession(
       req,
@@ -398,11 +397,11 @@
             }
           }
         }`
-    const client2 = new Shopify.Clients.Graphql(
+    const client = new Shopify.Clients.Graphql(
       session.shop,
       session.accessToken
     );
-    const products = await client2.query({
+    const products = await client.query({
       data: queryString,
     });
     console.log(products)
