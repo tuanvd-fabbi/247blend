@@ -382,5 +382,22 @@
   //   console.error(err)
   // });
 
-  fetch()
+  const queryString = `{
+  products (first: 3) {
+    edges {
+      node {
+        id
+        title
+      }
+    }
+  }
+}`
+    / / `session` is built as part of the OAuth process
+  const client = new Shopify.Clients.Graphql(
+    session.shop,
+    session.accessToken
+  );
+  const products = await client.query({
+    data: queryString,
+  });
 </script>
