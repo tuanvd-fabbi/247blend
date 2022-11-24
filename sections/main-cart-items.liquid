@@ -365,22 +365,22 @@
 {% endschema %}
 
 <script>
-  fetch('/admin/api/2022-01/customers/6501379637534.json', {
-    credentials: 'same-origin',
-    headers: {
-      'Content-Type': 'application/json',
-      'X-Requested-With': 'xmlhttprequest'
-    },
-    method: 'get'
-  }).then((response) => {
-    console.log(response.json())
-  }).then((json) => {
-    /* yay! our products were added - do something here to indicate to the user */
-    console.log('products', json)
-  }).catch((err) => {
-    /* uh oh, we have error. */
-    console.error(err)
-  });
+  // fetch('/admin/api/2022-01/customers/6501379637534.json', {
+  //   credentials: 'same-origin',
+  //   headers: {
+  //     'Content-Type': 'application/json',
+  //     'X-Requested-With': 'xmlhttprequest'
+  //   },
+  //   method: 'get'
+  // }).then((response) => {
+  //   console.log(response.json())
+  // }).then((json) => {
+  //   /* yay! our products were added - do something here to indicate to the user */
+  //   console.log('products', json)
+  // }).catch((err) => {
+  //   /* uh oh, we have error. */
+  //   console.error(err)
+  // });
 
   const storeFrontKey = process.env.STORE_FRONT_ACCESS_KEY;
   console.log(storeFrontKey);
