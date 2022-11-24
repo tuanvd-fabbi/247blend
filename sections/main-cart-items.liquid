@@ -381,10 +381,30 @@
   //   /* uh oh, we have error. */
   //   console.error(err)
   // });
-  returnSessionData();
-  export default async function returnSessionData(req, res) {
-    const decode =  await Shopify.Utils?.loadCurrentSession(req, res);
-    console.log(decode)
-    return decode
+  testGraphQL();
+  async function testGraphQL() {
+    const Shopify = require("@shopify/shopify-api")
+    const session = await Shopify.Utils.loadCurrentSession(
+      req,
+      res
+    );
+    const queryString = `{
+          products (first: 3) {
+            edges {
+              node {
+                id
+                title
+              }
+            }
+          }
+        }`
+    const client = new Shopify.Clients.Graphql(
+      session.shop,
+      session.accessToken
+    );
+    const products = await client.query({
+      data: queryString,
+    });
+    console.log(products)
   }
 </script>
