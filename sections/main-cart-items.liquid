@@ -363,14 +363,13 @@
   ]
 }
 {% endschema %}<script>
-  fetch('/cart/add.js', {
-    body: JSON.stringify(formData),
+  fetch('/admin/api/2022-01/customers/207119551.json', {
     credentials: 'same-origin',
     headers: {
       'Content-Type': 'application/json',
       'X-Requested-With': 'xmlhttprequest'
     },
-    method: 'POST'
+    method: 'get'
   }).then((response) => {
     console.log(response.json())
   }).then((json) => {
