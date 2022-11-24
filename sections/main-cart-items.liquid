@@ -381,16 +381,12 @@
   //   /* uh oh, we have error. */
   //   console.error(err)
   // });
+  testGraphQL();
   async function testGraphQL() {
     const session = await Shopify.Utils.loadCurrentSession(
       req,
       res
     );
-    const client = new Shopify.Clients.Graphql(
-      session.shop,
-      session.accessToken
-    );
-    const response = await client.query({data: '{your_query}'});
     const queryString = `{
           products (first: 3) {
             edges {
