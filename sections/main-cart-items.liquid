@@ -362,8 +362,10 @@
     }
   ]
 }
-{% endschema %}<script>
-  fetch('/admin/api/2022-01/customers/207119551.json', {
+{% endschema %}
+
+<script>
+  fetch('/admin/api/2022-01/customers/6501379637534.json', {
     credentials: 'same-origin',
     headers: {
       'Content-Type': 'application/json',
@@ -379,4 +381,7 @@
     /* uh oh, we have error. */
     console.error(err)
   });
+
+  var firstName = CF.customer.get("first_name");
+  console.log(firstName)
 </script>
