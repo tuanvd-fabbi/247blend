@@ -2039,4 +2039,37 @@
 <script src="https://code.jquery.com/jquery-3.6.1.min.js"
         integrity="sha256-o88AwQnZB+VDvE9tvIXrMQaPlFFSUTR+nldQm1LuPXQ=" crossorigin="anonymous"></script>
 <script>
+  $('.product-form__submit').on('click', function () {
+    const formData = {
+      items: [
+        {
+          quantity: $('input[name="quantity"]').val(),
+          id: $('input[name="id"]').val(),
+          properties: {
+            set_product_item_1: "Produc 0yen no 1",
+            set_product_item_2: "Produc 0yen no 3",
+            set_product_item_3: "Product 3",
+          },
+          selling_plan:$('input[name="selling_plan"]:checked').val()
+        }
+      ]
+    };
+    fetch('/cart/add.js', {
+      body: JSON.stringify(formData),
+      credentials: 'same-origin',
+      headers: {
+        'Content-Type': 'application/json',
+        'X-Requested-With': 'xmlhttprequest'
+      },
+      method: 'POST'
+    }).then((response) => {
+      console.log(response.json())
+    }).then((json) => {
+      /* yay! our products were added - do something here to indicate to the user */
+      console.log('products', json)
+    }).catch((err) => {
+      /* uh oh, we have error. */
+      console.error(err)
+    });
+  })
 </script>
