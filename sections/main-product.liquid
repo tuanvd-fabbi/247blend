@@ -1,3 +1,4 @@
+{% assign current_collection = product.collections[0].id %}
 <section
         id="MainProduct-{{ section.id }}"
         class="page-width section-{{ section.id }}-padding"
@@ -60,7 +61,8 @@
             >
                 <div id="GalleryStatus-{{ section.id }}" class="visually-hidden" role="status"></div>
                 <slider-component id="GalleryViewer-{{ section.id }}" class="slider-mobile-gutter">
-                    <a class="skip-to-content-link button visually-hidden quick-add-hidden" href="#ProductInfo-{{ section.id }}">
+                    <a class="skip-to-content-link button visually-hidden quick-add-hidden"
+                       href="#ProductInfo-{{ section.id }}">
                         {{ "accessibility.skip_to_product_info" | t }}
                     </a>
                     <ul
@@ -333,7 +335,8 @@
                             </a>
                         </div>
                     {%- when 'price' -%}
-                        <div class="no-js-hidden" id="price-{{ section.id }}" role="status" {{ block.shopify_attributes }}>
+                        <div class="no-js-hidden" id="price-{{ section.id }}"
+                             role="status" {{ block.shopify_attributes }}>
                             {%- render 'price', product: product, use_variant: true, show_badges: true, price_class: 'price--large' -%}
                         </div>
                     {%- if shop.taxes_included or shop.shipping_policy.body != blank -%}
@@ -349,7 +352,8 @@
                         <div {{ block.shopify_attributes }}>
                             {%- assign product_form_installment_id = 'product-form-installment-' | append: section.id -%}
                             {%- form 'product', product, id: product_form_installment_id, class: 'installment caption-large' -%}
-                                <input type="hidden" name="id" value="{{ product.selected_or_first_available_variant.id }}">
+                                <input type="hidden" name="id"
+                                       value="{{ product.selected_or_first_available_variant.id }}">
                                 {{ form | payment_terms }}
                             {%- endform -%}
                         </div>
@@ -373,13 +377,32 @@
                                     </div>
                                     {% render 'icon-caret' %}
                                 </summary>
-                                <div class="accordion__content rte" id="ProductAccordion-{{ block.id }}-{{ section.id }}">
+                                <div class="accordion__content rte"
+                                     id="ProductAccordion-{{ block.id }}-{{ section.id }}">
                                     {{ block.settings.content }}
                                     {{ block.settings.page.content }}
                                 </div>
                             </details>
                         </div>
                     {%- when 'quantity_selector' -%}
+                        {% comment %}section gift card{% endcomment %}
+                        Gift Set
+                        <select
+                                class="select__select"
+                                name="gift_card"
+                                form="{{ product_form_id }}"
+                        >
+                            {% if current_collection == 428128895262 %}
+                                {%- for gift_card in collections['select-blend-gift'].products -%}
+                                    <option
+                                            value="{{ gift_card.variants[0].id }}"
+                                    >
+                                        {{ gift_card.title }}
+                                    </option>
+                                {%- endfor -%}
+                            {% endif %}
+                        </select>
+                        {% comment %}end section gift card{% endcomment %}
                         <div
                                 class="product-form__input product-form__quantity{% if settings.inputs_shadow_vertical_offset != 0 and settings.inputs_shadow_vertical_offset < 0 %} product-form__quantity-top{% endif %}"
                                 {{ block.shopify_attributes }}
@@ -458,7 +481,8 @@
                                                 onclick="this.select();"
                                                 readonly
                                         >
-                                        <label class="field__label" for="url">{{ 'general.share.share_url' | t }}</label>
+                                        <label class="field__label"
+                                               for="url">{{ 'general.share.share_url' | t }}</label>
                                     </div>
                                     <button class="share-button__close hidden no-js-hidden">
                                         {% render 'icon-close' %}
@@ -503,7 +527,18 @@
                             {%- endfor -%}
                             <script type="application/json">
                       {{ product.variants | json }}
-                    </script>
+
+
+
+
+
+
+
+
+
+
+
+                            </script>
                         </variant-radios>
                     {%- else -%}
                         <variant-selects
@@ -542,7 +577,18 @@
 
                             <script type="application/json">
                       {{ product.variants | json }}
-                    </script>
+
+
+
+
+
+
+
+
+
+
+
+                            </script>
                         </variant-selects>
                     {%- endif -%}
                     {%- endunless -%}
@@ -591,9 +637,12 @@
                                             viewBox="0 0 13 13"
                                     >
                                         <circle cx="6.5" cy="6.50049" r="5.5" stroke="white" stroke-width="2"/>
-                                        <circle cx="6.5" cy="6.5" r="5.5" fill="#EB001B" stroke="#EB001B" stroke-width="0.7"/>
-                                        <path d="M5.87413 3.52832L5.97439 7.57216H7.02713L7.12739 3.52832H5.87413ZM6.50076 9.66091C6.88091 9.66091 7.18169 9.37267 7.18169 9.00504C7.18169 8.63742 6.88091 8.34917 6.50076 8.34917C6.12061 8.34917 5.81982 8.63742 5.81982 9.00504C5.81982 9.37267 6.12061 9.66091 6.50076 9.66091Z" fill="white"/>
-                                        <path d="M5.87413 3.17832H5.51535L5.52424 3.537L5.6245 7.58083L5.63296 7.92216H5.97439H7.02713H7.36856L7.37702 7.58083L7.47728 3.537L7.48617 3.17832H7.12739H5.87413ZM6.50076 10.0109C7.06121 10.0109 7.5317 9.57872 7.5317 9.00504C7.5317 8.43137 7.06121 7.99918 6.50076 7.99918C5.94031 7.99918 5.46982 8.43137 5.46982 9.00504C5.46982 9.57872 5.94031 10.0109 6.50076 10.0109Z" fill="white" stroke="#EB001B" stroke-width="0.7">
+                                        <circle cx="6.5" cy="6.5" r="5.5" fill="#EB001B" stroke="#EB001B"
+                                                stroke-width="0.7"/>
+                                        <path d="M5.87413 3.52832L5.97439 7.57216H7.02713L7.12739 3.52832H5.87413ZM6.50076 9.66091C6.88091 9.66091 7.18169 9.37267 7.18169 9.00504C7.18169 8.63742 6.88091 8.34917 6.50076 8.34917C6.12061 8.34917 5.81982 8.63742 5.81982 9.00504C5.81982 9.37267 6.12061 9.66091 6.50076 9.66091Z"
+                                              fill="white"/>
+                                        <path d="M5.87413 3.17832H5.51535L5.52424 3.537L5.6245 7.58083L5.63296 7.92216H5.97439H7.02713H7.36856L7.37702 7.58083L7.47728 3.537L7.48617 3.17832H7.12739H5.87413ZM6.50076 10.0109C7.06121 10.0109 7.5317 9.57872 7.5317 9.00504C7.5317 8.43137 7.06121 7.99918 6.50076 7.99918C5.94031 7.99918 5.46982 8.43137 5.46982 9.00504C5.46982 9.57872 5.94031 10.0109 6.50076 10.0109Z"
+                                              fill="white" stroke="#EB001B" stroke-width="0.7">
                                     </svg>
                                     <span class="product-form__error-message"></span>
                                 </div>
@@ -630,13 +679,12 @@
                                                         viewBox="0 0 66 66"
                                                         xmlns="http://www.w3.org/2000/svg"
                                                 >
-                                                    <circle class="path" fill="none" stroke-width="6" cx="33" cy="33" r="30"></circle>
+                                                    <circle class="path" fill="none" stroke-width="6" cx="33" cy="33"
+                                                            r="30"></circle>
                                                 </svg>
                                             </div>
                                         </button>
-                                        {%- if block.settings.show_dynamic_checkout -%}
-                                            {{ form | payment_button }}
-                                        {%- endif -%}
+                                        <button type="button" onclick="instantBuy()">buy now</button>
                                     </div>
                                 {%- endform -%}
                             </product-form>
@@ -707,7 +755,9 @@
                     {%- endif -%}
 
                     {%- when 'complementary' -%}
-                        <product-recommendations class="complementary-products quick-add-hidden no-js-hidden{% if block.settings.make_collapsible_row %} is-accordion{% endif %}" data-url="{{ routes.product_recommendations_url }}?section_id={{ section.id }}&product_id={{ product.id }}&limit={{ block.settings.product_list_limit }}&intent=complementary">
+                        <product-recommendations
+                                class="complementary-products quick-add-hidden no-js-hidden{% if block.settings.make_collapsible_row %} is-accordion{% endif %}"
+                                data-url="{{ routes.product_recommendations_url }}?section_id={{ section.id }}&product_id={{ product.id }}&limit={{ block.settings.product_list_limit }}&intent=complementary">
                             {%- if recommendations.performed and recommendations.products_count > 0 -%}
                                 <aside aria-label="{{ 'accessibility.complementary_products' | t }}" {{ block.shopify_attributes }}{% if block.settings.make_collapsible_row %} class="product__accordion accordion"{% endif %}>
                                     <div class="complementary-products__container">
@@ -729,9 +779,14 @@
                                             {%- endif -%}
                                             <slideshow-component class="slider-mobile-gutter">
                                                 {%- assign number_of_slides = recommendations.products_count | plus: 0.0 | divided_by: block.settings.products_per_page | ceil -%}
-                                                <div id="Slider-{{ block.id }}" class="contains-card contains-card--product complementary-slider grid grid--1-col slider slider--everywhere" role="list"{% if number_of_slides > 1 %} aria-label="{{ 'general.slider.name' | t }}"{% endif %}>
+                                                <div id="Slider-{{ block.id }}"
+                                                     class="contains-card contains-card--product complementary-slider grid grid--1-col slider slider--everywhere"
+                                                     role="list"{% if number_of_slides > 1 %} aria-label="{{ 'general.slider.name' | t }}"{% endif %}>
                                                     {%- for i in (1..number_of_slides) -%}
-                                                        <div id="Slide-{{ block.id }}-{{ forloop.index }}" class="complementary-slide complementary-slide--{{ settings.card_style }} grid__item slider__slide slideshow__slide" tabindex="-1" role="group"{% if number_of_slides > 1 %} aria-roledescription="{{ 'sections.slideshow.slide' | t }}" aria-label="{{ forloop.index }} {{ 'general.slider.of' | t }} {{ forloop.length }}"{% endif %}>
+                                                        <div id="Slide-{{ block.id }}-{{ forloop.index }}"
+                                                             class="complementary-slide complementary-slide--{{ settings.card_style }} grid__item slider__slide slideshow__slide"
+                                                             tabindex="-1"
+                                                             role="group"{% if number_of_slides > 1 %} aria-roledescription="{{ 'sections.slideshow.slide' | t }}" aria-label="{{ forloop.index }} {{ 'general.slider.of' | t }} {{ forloop.length }}"{% endif %}>
                                                             <ul class="list-unstyled" role="list">
                                                                 {%- for product in recommendations.products limit: block.settings.products_per_page offset: continue -%}
                                                                     <li>
@@ -752,7 +807,9 @@
                                                 </div>
                                                 {%- if number_of_slides > 1 -%}
                                                     <div class="slider-buttons no-js-hidden">
-                                                        <button type="button" class="slider-button slider-button--prev" name="previous" aria-label="{{ 'general.slider.previous_slide' | t }}">{% render 'icon-caret' %}</button>
+                                                        <button type="button" class="slider-button slider-button--prev"
+                                                                name="previous"
+                                                                aria-label="{{ 'general.slider.previous_slide' | t }}">{% render 'icon-caret' %}</button>
                                                         <div class="slider-counter slider-counter--{{ block.settings.pagination_style }}{% if block.settings.pagination_style == 'counter' or block.settings.pagination_style == 'numbers' %} caption{% endif %}">
                                                             {%- if block.settings.pagination_style == 'counter' -%}
                                                                 <span class="slider-counter--current">1</span>
@@ -762,14 +819,19 @@
                                                             {%- else -%}
                                                                 <div class="slideshow__control-wrapper">
                                                                     {%- for i in (1..number_of_slides) -%}
-                                                                        <button class="slider-counter__link slider-counter__link--{{ block.settings.pagination_style }} link" aria-label="{{ 'sections.slideshow.load_slide' | t }} {{ forloop.index }} {{ 'general.slider.of' | t }} {{ forloop.length }}" aria-controls="Slider-{{ block.id }}">
-                                                                            {%- if block.settings.pagination_style == 'numbers' -%}{{ forloop.index }}{% else %}<span class="dot"></span>{%- endif -%}
+                                                                        <button class="slider-counter__link slider-counter__link--{{ block.settings.pagination_style }} link"
+                                                                                aria-label="{{ 'sections.slideshow.load_slide' | t }} {{ forloop.index }} {{ 'general.slider.of' | t }} {{ forloop.length }}"
+                                                                                aria-controls="Slider-{{ block.id }}">
+                                                                            {%- if block.settings.pagination_style == 'numbers' -%}{{ forloop.index }}{% else %}
+                                                                                <span class="dot"></span>{%- endif -%}
                                                                         </button>
                                                                     {%- endfor -%}
                                                                 </div>
                                                             {%- endif -%}
                                                         </div>
-                                                        <button type="button" class="slider-button slider-button--next" name="next" aria-label="{{ 'general.slider.next_slide' | t }}">{% render 'icon-caret' %}</button>
+                                                        <button type="button" class="slider-button slider-button--next"
+                                                                name="next"
+                                                                aria-label="{{ 'general.slider.next_slide' | t }}">{% render 'icon-caret' %}</button>
                                                     </div>
                                                 {%- endif -%}
                                             </slideshow-component>
@@ -783,7 +845,8 @@
                             {{ 'section-product-recommendations.css' | asset_url | stylesheet_tag }}
                             {{ 'component-complementary-products.css' | asset_url | stylesheet_tag }}
                             {%- if block.settings.enable_quick_add -%}
-                                <link rel="stylesheet" href="{{ 'quick-add.css' | asset_url }}" media="print" onload="this.media='all'">
+                                <link rel="stylesheet" href="{{ 'quick-add.css' | asset_url }}" media="print"
+                                      onload="this.media='all'">
                                 <script src="{{ 'quick-add.js' | asset_url }}" defer="defer"></script>
                             {%- endif -%}
                         </product-recommendations>
@@ -1084,12 +1147,23 @@
     {%- if first_3d_model -%}
         <script type="application/json" id="ProductJSON-{{ product.id }}">
       {{ product.media | where: 'media_type', 'model' | json }}
-    </script>
+
+
+
+
+
+
+
+
+
+
+
+        </script>
         <script src="{{ 'product-model.js' | asset_url }}" defer></script>
     {%- endif -%}
 
     <script>
-      document.addEventListener('DOMContentLoaded', function() {
+      document.addEventListener('DOMContentLoaded', function () {
         function isIE() {
           const ua = window.navigator.userAgent;
           const msie = ua.indexOf('MSIE ');
@@ -1105,10 +1179,24 @@
         noScriptInputWrapper.innerHTML = document.querySelector('.product-form__noscript-wrapper-{{ section.id }}').textContent;
         variantSwitcher.outerHTML = noScriptInputWrapper.outerHTML;
 
-        document.querySelector('#Variants-{{ section.id }}').addEventListener('change', function(event) {
+        document.querySelector('#Variants-{{ section.id }}').addEventListener('change', function (event) {
           hiddenInput.value = event.currentTarget.value;
         });
       });
+
+      function instantBuy() {
+        $.ajax({
+          url: "/cart/add",
+          type: "post",
+          data: $('form').serialize(),
+          dataType: 'json',
+          success: function () {
+            window.location.href = "/checkout";
+          },
+          error: function (err) {
+          }
+        })
+      }
     </script>
 
     {%- liquid
@@ -1158,11 +1246,22 @@
             "price" : {{ variant.price | divided_by: 100.00 | json }},
             "priceCurrency" : {{ cart.currency.iso_code | json }},
             "url" : {{ request.origin | append: variant.url | json }}
-          }{% unless forloop.last %},{% endunless %}
+          }{% unless forloop.last %}{% endunless %}
         {%- endfor -%}
       ]
     }
-  </script>
+
+
+
+
+
+
+
+
+
+
+
+    </script>
 </section>
 
 {% schema %}
@@ -1937,3 +2036,40 @@
   ]
 }
 {% endschema %}
+<script src="https://code.jquery.com/jquery-3.6.1.min.js"
+        integrity="sha256-o88AwQnZB+VDvE9tvIXrMQaPlFFSUTR+nldQm1LuPXQ=" crossorigin="anonymous"></script>
+<script>
+  $('.product-form__submit').on('click', function () {
+    const formData = {
+      items: [
+        {
+          quantity: $('input[name="quantity"]').val(),
+          id: $('input[name="id"]').val(),
+          properties: {
+            set_product_item_1: "Produc 0yen no 1",
+            set_product_item_2: "Produc 0yen no 3",
+            set_product_item_3: "Product 3",
+          }
+          selling_plan:
+        }
+      ]
+    };
+    fetch('/cart/add.js', {
+      body: JSON.stringify(formData),
+      credentials: 'same-origin',
+      headers: {
+        'Content-Type': 'application/json',
+        'X-Requested-With': 'xmlhttprequest'
+      },
+      method: 'POST'
+    }).then((response) => {
+      console.log(response.json())
+    }).then((json) => {
+      /* yay! our products were added - do something here to indicate to the user */
+      console.log('products', json)
+    }).catch((err) => {
+      /* uh oh, we have error. */
+      console.error(err)
+    });
+  })
+</script>
