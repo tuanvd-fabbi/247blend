@@ -510,7 +510,7 @@
                                     <legend class="form__label">{{ option.name }}</legend>
                                     {%- for value in option.values -%}
                                         <input
-                                                type="radio"
+                                                type="checkbox"
                                                 id="{{ section.id }}-{{ option.position }}-{{ forloop.index0 }}"
                                                 name="{{ option.name }}"
                                                 value="{{ value | escape }}"
