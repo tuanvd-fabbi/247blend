@@ -36,13 +36,13 @@
             "picker_type": "button"
           }
         },
-        "quantity_selector": {
-          "type": "quantity_selector",
+        "f4a00319-b109-4fb3-a680-27b5f0f3e2f9": {
+          "type": "shopify:\/\/apps\/appstle-subscriptions\/blocks\/appstle-subscription-product-page-widget\/fe257d39-6f88-4f35-ab08-bd437e3aa94e",
           "settings": {
           }
         },
-        "f4a00319-b109-4fb3-a680-27b5f0f3e2f9": {
-          "type": "shopify:\/\/apps\/appstle-subscriptions\/blocks\/appstle-subscription-product-page-widget\/fe257d39-6f88-4f35-ab08-bd437e3aa94e",
+        "quantity_selector": {
+          "type": "quantity_selector",
           "settings": {
           }
         },
@@ -71,8 +71,8 @@
         "price",
         "judgeme_preview_badge_product_page_6fab5346",
         "variant_picker",
-        "quantity_selector",
         "f4a00319-b109-4fb3-a680-27b5f0f3e2f9",
+        "quantity_selector",
         "buy_buttons",
         "description",
         "share"
