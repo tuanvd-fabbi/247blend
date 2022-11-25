@@ -307,8 +307,7 @@
                 {%- endif -%}
             </media-gallery>
         </div>
-        {%- form 'product', product, id: product_form_id, class: 'form', novalidate: 'novalidate', data-type: 'add-to-cart-form' -%}
-            <div class="product__info-wrapper grid__item{% if settings.page_width > 1400 and section.settings.media_size == "small" %} product__info-wrapper--extra-padding{% endif %}">
+        <div class="product__info-wrapper grid__item{% if settings.page_width > 1400 and section.settings.media_size == "small" %} product__info-wrapper--extra-padding{% endif %}">
             <div
                     id="ProductInfo-{{ section.id }}"
                     class="product__info-container{% if section.settings.enable_sticky_info %} product__info-container--sticky{% endif %}"
@@ -648,7 +647,7 @@
                                     <span class="product-form__error-message"></span>
                                 </div>
 
-
+                                {%- form 'product', product, id: product_form_id, class: 'form', novalidate: 'novalidate', data-type: 'add-to-cart-form' -%}
                                     <input
                                             type="hidden"
                                             name="id"
@@ -687,6 +686,7 @@
                                         </button>
                                         <button type="button" onclick="instantBuy()">buy now</button>
                                     </div>
+                                {%- endform -%}
                             </product-form>
 
                             {{ 'component-pickup-availability.css' | asset_url | stylesheet_tag }}
@@ -858,7 +858,6 @@
                 </a>
             </div>
         </div>
-        {%- endform -%}
         {%- if section.settings.media_position == 'right' -%}
             <div class="grid__item product__media-wrapper small-hide">
                 <media-gallery
