@@ -245,12 +245,6 @@
         "settings": {
         }
       },
-      "3720565183479497137": {
-        "type": "shopify:\/\/apps\/globo-product-options-variant\/blocks\/app-embed-block\/fdc9fad5-1a0f-4bd4-9c8a-1af6a6eef6b8",
-        "disabled": false,
-        "settings": {
-        }
-      },
       "9776720720251544092": {
         "type": "shopify:\/\/apps\/helium-customer-fields\/blocks\/app-embed\/bab58598-3e6a-4377-aaaa-97189b15f131",
         "disabled": false,
@@ -262,6 +256,12 @@
           "edit_account_back_link_text": "Back to account",
           "enable_js_api": false,
           "js_api_version": ""
+        }
+      },
+      "3720565183479497137": {
+        "type": "shopify:\/\/apps\/globo-product-options-variant\/blocks\/app-embed-block\/fdc9fad5-1a0f-4bd4-9c8a-1af6a6eef6b8",
+        "disabled": true,
+        "settings": {
         }
       }
     }
