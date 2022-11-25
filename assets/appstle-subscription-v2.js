@@ -363,7 +363,7 @@ var appstleInit = function () {
                     "sellingPlanFrequencyText": sellingPlanFrequencyText,
                     "discountText": priceAdjustment?.value ? discountText : null,
 					          "formattedDiscountText": priceAdjustment?.value ? buildDiscountText(discountText) : '',
-                    "isChecked": (subIndex == 0 && RSConfig?.subscriptionOptionSelectedByDefault) ? true : false,
+                    "isChecked": (index == 0 && subIndex == 0 && (RSConfig?.subscriptionOptionSelectedByDefault || product.requires_selling_plan)) ? true : false,
                     "formattedPrepaidPerDeliveryPriceText": buildPrepaidPerDeliveryPriceText(formattedPrice)
                   }
                   jQuery.extend(sellingPlanDetails, JSON.parse(JSON.stringify(getSellingPlanDetails(sellingPlan.id))))
@@ -1121,7 +1121,7 @@ var appstleInit = function () {
                       </table></div>`
           tableData = {"items": tableData};
             output = Mustache.render(template, tableData);
-            jQuery(output).insertAfter('#appstle_subscription_widget' + widgetId + ' .appstle_subscription_wrapper')
+            jQuery(output).insertAfter('#appstle_subscription_widget' + widgetId + ' .widgetSellingPlanWrapper')
           }
         }
 
