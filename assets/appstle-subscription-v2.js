@@ -377,7 +377,7 @@ var appstleInit = function () {
 
                     sellingPlanDetails["showSecondFormattedDiscountText"] = true;
                   }
-                  sellingPlanDetails.prepaidFlag = Boolean(sellingPlanDetails.prepaidFlag);
+                  sellingPlanDetails.prepaidFlag = eval(sellingPlanDetails.prepaidFlag);
                   // if (sellingPlanDetails.frequencyInterval === 'MONTH') {
                   //   sellingPlanDetails.frequencyInterval = 'Monat'
                   // }
@@ -1451,6 +1451,8 @@ var appstleInit = function () {
       jsonWrapperOutput.deliveryFrequencyText = RS.Config.sellingPlanSelectTitle
       jsonWrapperOutput.showAppstleLink = RS.Config.showAppstleLink
       jsonWrapperOutput.subscriptionOptionSelectedDefault = RS.Config.subscriptionOptionSelectedByDefault
+      jsonWrapperOutput.showSubOptionBeforeOneTime = RS.Config.showSubOptionBeforeOneTime
+      jsonWrapperOutput.showTooltip = RS.Config.showTooltip
 			return jsonWrapperOutput
 		}
 

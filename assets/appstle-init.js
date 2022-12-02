@@ -17,14 +17,14 @@
       };
 
 
-      appstleLoadScript("https://cdn.shopify.com/s/files/1/0670/0977/3854/t/3/assets/appstle-subscription-v2.js?v=1669344527");
+      appstleLoadScript("https://cdn.shopify.com/s/files/1/0670/0977/3854/t/3/assets/appstle-subscription-v2.js?v=1669955308");
 
 
       window.RS = Window.RS || {};
       RS.Config = {
         "selectors": {
             "payment_button_selectors": "form[action$='/cart/add'] .shopify-payment-button",
-            "subscriptionLinkSelector": "#MainContent > div > div:nth-child(2) > div:nth-child(2) > h2",
+            "subscriptionLinkSelector": "#shopify-section-template--16825442566430__main > div > div:nth-child(1) > a",
             "atcButtonPlacement": "BEFORE",
             "subscriptionLinkPlacement": "BEFORE",
             "cartRowSelector": "",
