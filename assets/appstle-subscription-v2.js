@@ -144,7 +144,7 @@ var appstleInit = function () {
           var userTags = RSConfig.customer_tags || [];
           var isVisible = true;
 
-          if (!customerId && RSConfig.memberOnlySellingPlansJson && RSConfig.memberOnlySellingPlansJson[sellingPlanId]) {
+          if (!customerId && RSConfig.memberOnlySellingPlansJson && RSConfig.memberOnlySellingPlansJson[sellingPlanId] && RSConfig.memberOnlySellingPlansJson[sellingPlanId]['enableMemberInclusiveTag']) {
             isVisible = false;
           }
 
@@ -157,6 +157,12 @@ var appstleInit = function () {
               var sellingPlanTags = RSConfig.memberOnlySellingPlansJson[sellingPlanId].memberInclusiveTags.split(",");
               var tagFound = compareCustomerTags(userTags, sellingPlanTags);
               isVisible = (tagFound.length > 0);
+            }
+
+            if (RSConfig.memberOnlySellingPlansJson[sellingPlanId].memberExclusiveTags && RSConfig.memberOnlySellingPlansJson[sellingPlanId].memberExclusiveTags.trim()) {
+              var sellingPlanExclusiveTags = RSConfig.memberOnlySellingPlansJson[sellingPlanId].memberExclusiveTags.split(",");
+              var exclusiveTagFound = compareCustomerTags(userTags, sellingPlanExclusiveTags);
+              isVisible = !(exclusiveTagFound.length > 0);
             }
           }
 
@@ -483,6 +489,7 @@ var appstleInit = function () {
 
             var reload = function () {
               // RSConfig.switchRadioButtonWidget = true;
+              var MustacheWrapperJSON = null;
               try {
                 // if(!product.available)
                 // {
@@ -588,7 +595,7 @@ var appstleInit = function () {
                   variantId = localVariantId;
                 }
               } catch (e) {
-                console.log(e)
+                console.error(e)
               }
             }
 
@@ -619,6 +626,16 @@ var appstleInit = function () {
               }, parseInt(RSConfig?.scriptLoadDelay) > 0 ? parseInt(RSConfig?.scriptLoadDelay) : 30);
               });
               standAloneElement.closest('form[action$="/cart/add"]').on('click', function () {
+                setTimeout(function () {
+                  reload();
+                  updateHistoryState();
+                  if(window?._transcy)
+                    {
+                      window?._transcy?.methods?.reConvertCurrency()
+                    }
+              }, parseInt(RSConfig?.scriptLoadDelay) > 0 ? parseInt(RSConfig?.scriptLoadDelay) : 30);
+              });
+              standAloneElement.closest('form[action$="/cart/add"]').find('*').on('click', function () {
                 setTimeout(function () {
                   reload();
                   updateHistoryState();
@@ -819,7 +836,7 @@ var appstleInit = function () {
         }
         function appendSellingPlanDescription(sellingPlanDescription){
           if(sellingPlanDescription && $(`#appstle_subscription_widget${widgetId} .appstleSelectedSellingPlanOptionDescription`).length === 0 && checkIfSellingPlanGroupIsSelected()){
-                  $( "<div class='appstleSelectedSellingPlanOptionDescription'>${sellingPlanDescription}</div>" ).insertBefore( `#appstle_subscription_widget${widgetId} .appstle_tooltip_wrapper` );
+            $( "<div class='appstleSelectedSellingPlanOptionDescription'>${sellingPlanDescription}</div>" ).insertAfter( `#appstle_subscription_widget${widgetId} .widgetSellingPlanWrapper` );
             }
           }
         function triggerChangeEvent(selector) {
@@ -1078,56 +1095,58 @@ var appstleInit = function () {
 
   }
 
-        function createLoyaltyTableData(selectedSellingPlan, show) {
-          var tableData = [];
-          jQuery('#appstle_subscription_widget' + widgetId +  ' .appstleLoyaltyTable').remove();
-          var sellingPlanData = RSConfig?.sellingPlansJson?.find(function(item) {return item?.id.split("/").pop() === String(selectedSellingPlan)});
-          var output = null;
-          if (sellingPlanData?.freeTrialEnabled) {
-            tableData.push({perkText: getPerkText(0, sellingPlanData.freeTrialCount, sellingPlanData.freeTrialInterval, sellingPlanData?.freeTrialEnabled)})
-          }
-          if (sellingPlanData?.afterCycle2) {
-            if (parseFloat(sellingPlanData.discountOffer2) > 0) {
+      function createLoyaltyTableData(selectedSellingPlan, show) {
+        var tableData = [];
+        jQuery('#appstle_subscription_widget' + widgetId +  ' .appstleLoyaltyTable').remove();
+        var sellingPlanData = RSConfig?.sellingPlansJson?.find(function(item) {return item?.id.split("/").pop() === String(selectedSellingPlan)});
+        var output = null;
+        if (sellingPlanData?.freeTrialEnabled) {
+          tableData.push({perkText: getPerkText(0, sellingPlanData.freeTrialCount, sellingPlanData.freeTrialInterval, sellingPlanData?.freeTrialEnabled)})
+        }
+        if (sellingPlanData?.afterCycle2) {
+          if (parseFloat(sellingPlanData.discountOffer2) > 0) {
             tableData.push({perkText: getPerkText(getBillingCycleText(sellingPlanData.afterCycle2), sellingPlanData.discountOffer2, sellingPlanData.discountType2, false)})
           }
-          }
-          if (sellingPlanData?.appstleCycles?.length) {
-              sellingPlanData?.appstleCycles?.forEach(function(cycle) {
-                var productName = ""
-                var featured_image = ""
-                if (cycle.discountType === "FREE_PRODUCT") {
-                  productName = window?.products?.[cycle.freeProductHandle]?.title;
-                  if (window?.products?.[cycle.freeProductHandle]?.variants.length > 1) {
-                    var variant = window?.products?.[cycle.freeProductHandle]?.variants.filter(variant => variant.id === parseInt(cycle?.freeVariantId));
-                    var variantTitle = (variant.pop())?.title;
-                    productName = productName + " - " + variantTitle;
-                  }
-                  featured_image = window?.products?.[cycle.freeProductHandle]?.featured_image;
-                }
-                if ((parseFloat(cycle.value) > 0) || productName || (cycle.discountType === "SHIPPING")) {
-                  tableData.push({perkText: getPerkText(getBillingCycleText(cycle.afterCycle), cycle.value, cycle.discountType, false, productName, featured_image)})
-                }
-              })
-          }
-          let loyaltyDetailLabelText = RSConfig?.loyaltyDetailsLabelText || "Subscriber Rewards";
-          if (tableData.length) {
-            var template = `<div class="appstleLoyaltyTable" ${!show ? `style="display: none;"` : ``}><table width="100%">
-                        <div class="appstle_loyalty_title">${loyaltyDetailLabelText}</div>
-                        <tbody>
-                          {{#items}}
-                            <tr>
-                              <td>{{{perkText}}}</td>
-                            </tr>
-                           {{/items}}
-                        </tbody>
-                      </table></div>`
-          tableData = {"items": tableData};
-            output = Mustache.render(template, tableData);
-            jQuery(output).insertAfter('#appstle_subscription_widget' + widgetId + ' .widgetSellingPlanWrapper')
-          }
         }
+        if (sellingPlanData?.appstleCycles?.length) {
+            sellingPlanData?.appstleCycles?.forEach(function(cycle) {
+              var productName = ""
+              var productPrice = ''
+              var featured_image = ""
+              if (cycle.discountType === "FREE_PRODUCT") {
+                productName = window?.products?.[cycle.freeProductHandle]?.title;
+                if (window?.products?.[cycle.freeProductHandle]?.variants.length > 1) {
+                  var variant = window?.products?.[cycle.freeProductHandle]?.variants.filter(variant => variant.id === parseInt(cycle?.freeVariantId));
+                  var variantTitle = (variant.pop())?.title;
+                  productName = productName + " - " + variantTitle;
+                }
+                featured_image = window?.products?.[cycle.freeProductHandle]?.featured_image;
+                productPrice = formatPrice(window?.products?.[cycle.freeProductHandle]?.price);
+              }
+              if ((parseFloat(cycle.value) > 0) || productName || (cycle.discountType === "SHIPPING")) {
+                tableData.push({perkText: getPerkText(getBillingCycleText(cycle.afterCycle), cycle.value, cycle.discountType, false, productName, featured_image, productPrice)})
+              }
+            })
+        }
+        let loyaltyDetailLabelText = RSConfig?.loyaltyDetailsLabelText || "Subscriber Rewards";
+        if (tableData.length) {
+          var template = `<div class="appstleLoyaltyTable" ${!show ? `style="display: none;"` : ``}><table width="100%">
+                      <div class="appstle_loyalty_title">${loyaltyDetailLabelText}</div>
+                      <tbody>
+                        {{#items}}
+                          <tr>
+                            <td>{{{perkText}}}</td>
+                          </tr>
+                        {{/items}}
+                      </tbody>
+                    </table></div>`
+        tableData = {"items": tableData};
+          output = Mustache.render(template, tableData);
+          jQuery(output).insertAfter('#appstle_subscription_widget' + widgetId + ' .appstle_subscription_wrapper')
+        }
+      }
 
-        function getPerkText(billingCycle, discount, discountType, freeTrail, productName, featured_image) {
+        function getPerkText(billingCycle, discount, discountType, freeTrail, productName, featured_image, productPrice) {
           if(JSON.parse(RS.Config.labels)['appstle.subscription.wg.loyaltyPerkDescriptionTextV2'])
           {
             // NEED TO VERIFY
@@ -1143,6 +1162,7 @@ var appstleInit = function () {
               isFreeTrial: freeTrail,
               isCartPage: false,
               featured_image: featured_image,
+              productPrice: productPrice,
               billingCycleBlock: `<span class="appstle-loyalty-billing-cycle"><span class="appstle-loyalty-billing-cycle-count">${billingCycle}</span>`
             }
             return Mustache.render(RS.Config.loyaltyPerkDescriptionText, selectedPerkText);
@@ -1209,19 +1229,31 @@ var appstleInit = function () {
           }
 
           var selectors = selectorsObject.regular;
-          jQuery('.appstle_subscription_final_price').remove();
-          jQuery('.appstle_subscription_element').remove();
-          jQuery('.appstle_subscription_compare_price').remove();
+          if (RSConfig?.widgetParentSelector) {
+            jQuery('#appstle_subscription_widget' + widgetId).parents(RSConfig?.widgetParentSelector).find('.appstle_subscription_final_price').remove();
+            jQuery('#appstle_subscription_widget' + widgetId).parents(RSConfig?.widgetParentSelector).find('.appstle_subscription_element').remove();
+            jQuery('#appstle_subscription_widget' + widgetId).parents(RSConfig?.widgetParentSelector).find('.appstle_subscription_compare_price').remove();
+          } else {
+            jQuery('.appstle_subscription_final_price').remove();
+            jQuery('.appstle_subscription_element').remove();
+            jQuery('.appstle_subscription_compare_price').remove();
+          }
 
           var formattedPrice = getSelectedSellingPlanPrice();
           var selectedDiscount = getSellingPlanDiscountPercentage();
 
           var sellingPrice = jQuery(selectors.sellingPrice);
 
+          if (RSConfig?.widgetParentSelector) {
+            sellingPrice = jQuery('#appstle_subscription_widget' + widgetId).parents(RSConfig?.widgetParentSelector).find(selectors.sellingPrice)
+          }
+
           sellingPrice.css('text-decoration', '');
           // sellingPrice.css('display', '');
+          sellingPrice.removeAttr('data-appstle-price-modified')
 
           if (!selectors.sellingPrice || !selectedDiscount) {
+            sellingPrice.attr('data-appstle-price-modified', true)
             return;
           }
 
@@ -1236,8 +1268,16 @@ var appstleInit = function () {
               subscriptionPercentageSavingElement && subscriptionPercentageSavingElement.css('top', selectors.saleBadgeTop);
 
               var clonedSellingPrice = sellingPrice.first().clone();
-              clonedSellingPrice.addClass('appstle_subscription_final_price transcy-money')
+              clonedSellingPrice.addClass('appstle_subscription_final_price')
               clonedSellingPrice.html(formattedPrice);
+
+              var attrs = getAttributes(clonedSellingPrice)
+
+              Object.keys(attrs).forEach(key => {
+                if ((key !== "class") && (key !== "style")) {
+                  clonedSellingPrice.removeAttr(key)
+                }
+              })
 
               sellingPrice.css('text-decoration', 'line-through');
 
@@ -1246,7 +1286,19 @@ var appstleInit = function () {
               subscriptionPercentageSavingElement.insertAfter(sellingPrice);
             }
           }
+         sellingPrice.attr('data-appstle-price-modified', true)
         }
+
+        function getAttributes ( $node ) {
+          var attrs = {};
+          if($node && $node.length > 0) {
+            $.each( $node[0]?.attributes, function ( index, attribute ) {
+                attrs[attribute.name] = attribute.value;
+            } );
+           }
+
+          return attrs;
+      }
 
 
         function getSellingPlanDiscountPercentage(isMultipleDiscount, selectedSellingPlan) {
@@ -1356,7 +1408,7 @@ var appstleInit = function () {
                     </div>`
                     ))
                     getJqueryUIFromCDN();
-                    attatchDatePicker(field['config']);
+                    attatchDatePicker(field['config'], field['enabledDays']);
                   } else if (field['type'] === 'text') {
                     wrapper.append(jQuery(`
                     <div class="appstleCustomTextField" ${field["visible"] ? '' : 'style="display: none;"'}>
@@ -1395,9 +1447,9 @@ var appstleInit = function () {
           }
         }
 
-       }
+      }
 
-       function attatchDatePicker(config) {
+       function attatchDatePicker(config, enabledDays) {
         var currentDate = new Date();
         if (jQuery.datepicker) {
           if (jQuery('#appstle_subscription_widget' + widgetId + ' .appstle_form_field_input_iso').length) {
@@ -1410,6 +1462,19 @@ var appstleInit = function () {
               buttonImage: "https://ik.imagekit.io/mdclzmx6brh/calendar_month_FILL0_wght400_GRAD0_opsz48_iJLonfrRJ.png",
               defaultDate: currentDate,
               currentText: "Now",
+              beforeShowDay: function(dt) {
+                if (!enabledDays || !enabledDays?.length) {
+                    return [true]
+                } else {
+                    var currDate = new Date(dt);
+                    var allowedDate = enabledDays.map(item => parseInt(item?.value));
+                    if (allowedDate.indexOf(currDate.getDay()) !== -1) {
+                      return [true]
+                    } else {
+                      return [false]
+                    }
+                }
+              },
               onSelect: function() {
                 // $(this).change();
                 $(this).parents('.as-date-input-wrapper').find('input').trigger('change')
@@ -1426,7 +1491,7 @@ var appstleInit = function () {
             jQuery('#appstle_subscription_widget' + widgetId + ' .appstle_form_field_input').parents('.as-date-input-wrapper').find('input').trigger('change');
           }
         } else {
-          setTimeout(() => attatchDatePicker(config), 30)
+          setTimeout(() => attatchDatePicker(config, enabledDays), 30)
         }
        }
 
@@ -1809,7 +1874,6 @@ var appstleInit = function () {
         }
 
         #appstle_subscription_widget${widgetId} .appstle_tooltip_content {
-          background-color: #3a3a3a;
           padding: 16px;
         }
 
@@ -1967,6 +2031,10 @@ span.as-formattedPrepaidPerDeliveryPriceText {
   align-items: center;
 }
 
+#ui-datepicker-div {
+  z-index: 1000000 !important;
+}
+
 
         </style>
         <style>${css.customCSS}</style>`
@@ -2012,7 +2080,7 @@ span.as-formattedPrepaidPerDeliveryPriceText {
                         attatchWidgetToStandAloneElement();
                       })
                     .catch((err) => {
-                      console.log(err)
+                      console.error(err)
                     })
                   } else {
                       renderWidget(product, $(standAloneElement), index);
@@ -2235,7 +2303,7 @@ span.as-formattedPrepaidPerDeliveryPriceText {
               document.dispatchEvent( new Event('AppstleSubscription:CustomerPortal:Embedded') );
               window.dispatchEvent( new Event('AppstleSubscription:CustomerPortal:Embedded') );
             })
-            .catch(error => console.log('error', error));
+            .catch(error => console.error('error', error));
         }
       }
 
@@ -2376,10 +2444,11 @@ span.as-formattedPrepaidPerDeliveryPriceText {
 
         function appstleListenForDOMChanges() {
           var elementId = "";
-          if (jQuery("main").attr("id")) {
-            elementId = jQuery("main").attr("id");
+          var element = jQuery("main, body").first();
+          if (element.attr("id")) {
+            elementId = element.attr("id");
           } else {
-            jQuery("main").attr("id", "appstleCustomId");
+            element.attr("id", "appstleCustomId");
             elementId = "appstleCustomId";
           }
           const targetNode = document.getElementById(elementId);
@@ -2431,7 +2500,7 @@ span.as-formattedPrepaidPerDeliveryPriceText {
                           resolve(response);
                         })
                         .catch((error) => {
-                          reject(response);
+                          console.error(error);
                         })
                     });
                   }
@@ -2463,7 +2532,7 @@ span.as-formattedPrepaidPerDeliveryPriceText {
             });
         }
 
-        function getPerkText(billingCycle, discount, discountType, freeTrail, isFirst, productName, featured_image) {
+        function getPerkText(billingCycle, discount, discountType, freeTrail, isFirst, productName, featured_image, productPrice) {
           if(JSON.parse(RS.Config.labels)['appstle.subscription.wg.loyaltyPerkDescriptionTextV2'])
           {
             // NEED TO VERIFY
@@ -2478,6 +2547,7 @@ span.as-formattedPrepaidPerDeliveryPriceText {
               isFreeTrial: freeTrail,
               isCartPage: true,
               featured_image: featured_image,
+              productPrice: productPrice,
               billingCycleBlock: `<span class="appstle-loyalty-billing-cycle"><span class="appstle-loyalty-billing-cycle-count">${billingCycle}</span>`
             }
             return Mustache.render(JSON.parse(RS.Config.labels)['appstle.subscription.wg.loyaltyPerkDescriptionTextV2'], selectedPerkText);
@@ -2529,6 +2599,7 @@ span.as-formattedPrepaidPerDeliveryPriceText {
               sellingPlanData?.appstleCycles?.forEach(function(cycle, index) {
                     var productName = ""
                     var featured_image = ""
+                    var productPrice = ''
                     if (cycle?.discountType === "FREE_PRODUCT") {
                       productName = window?.products?.[cycle.freeProductHandle]?.title;
                       if (window?.products?.[cycle?.freeProductHandle]?.variants.length > 1) {
@@ -2537,15 +2608,16 @@ span.as-formattedPrepaidPerDeliveryPriceText {
                         productName = productName + " - " + variantTitle;
                       }
                       featured_image = window?.products?.[cycle.freeProductHandle]?.featured_image;
+                      productPrice = formatPrice(window?.products?.[cycle.freeProductHandle]?.price);
                     }
                     if ((sellingPlanData?.afterCycle2) && index < 1) {
                       text = text + " " + getPerkText(getBillingCycleText(cycle.afterCycle), cycle.value, cycle.discountType, false, false, productName)
                     } else if (!sellingPlanData?.afterCycle2) {
                       if (index < 2) {
                         if (index == 0) {
-                          text = getPerkText(getBillingCycleText(cycle.afterCycle), cycle.value, cycle.discountType, false, true, productName, featured_image)
+                          text = getPerkText(getBillingCycleText(cycle.afterCycle), cycle.value, cycle.discountType, false, true, productName, featured_image, productPrice)
                         } else {
-                          text = text + " " + getPerkText(getBillingCycleText(cycle.afterCycle), cycle.value, cycle.discountType, false, false, productName, featured_image)
+                          text = text + " " + getPerkText(getBillingCycleText(cycle.afterCycle), cycle.value, cycle.discountType, false, false, productName, featured_image, productPrice)
                         }
                       }
                     }
@@ -2754,10 +2826,14 @@ span.as-formattedPrepaidPerDeliveryPriceText {
               appstleCartPageSubscription();
             }, 200)
           })
-        .catch((err) => console.log(err))
+        .catch((err) => console.error(err))
       }
 
-
+        function compareCustomerTags(array1, array2) {
+          return array1.filter(function (n) {
+            return array2.indexOf(n) != -1;
+          });
+        }
 
         function isSellingPlanVisible(sellingPlanId) {
           var customerId = __st.cid;
